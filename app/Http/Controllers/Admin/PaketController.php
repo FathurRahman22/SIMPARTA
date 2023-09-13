@@ -32,7 +32,7 @@ class PaketController extends Controller
                 ['dataprofil_id', '=', $user->dataprofil_id]
             ];
         }
-
+       
         $pakets = Paket::with(['media', 'dataprofil'])->where($filters)->get();
         $dataprofils = Dataprofil::get();
 

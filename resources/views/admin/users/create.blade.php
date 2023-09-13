@@ -61,7 +61,7 @@
                 <label class="required" for="dataprofil_id"> Data Profil </label>
                 <select class="form-control select2" name="dataprofil_id" id="dataprofil_id" required>
                     @foreach($dataprofils as $id => $dataprofil)
-                        <option value="{{ $id }}">{{ $dataprofil->name }}</option>
+                        <option value="{{ $dataprofil->id }}">{{ $dataprofil->name }}</option>
                     @endforeach
                 </select>
                 @if($errors->has('roles'))

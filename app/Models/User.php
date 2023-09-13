@@ -41,7 +41,7 @@ class User extends Authenticatable
         'created_at',
         'updated_at',
         'deleted_at',
-        'dataprofil',
+        'dataprofil_id',
     ];
 
     public function dataprofil()
