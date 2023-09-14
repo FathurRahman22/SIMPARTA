@@ -24,15 +24,15 @@
                         </th>
                         <th>
                             {{ trans('cruds.dataprofil.fields.id') }}
-                        </th>   
+                        </th> 
+                        <th>
+                            {{ trans('cruds.dataprofil.fields.tag') }}
+                        </th>  
                         <th>
                             {{ trans('cruds.dataprofil.fields.daftar_usaha_pariwisata') }}
                         </th>
                         <th>
                             {{ trans('cruds.dataprofil.fields.daftar_sub_jenis_usaha') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.dataprofil.fields.name') }}
                         </th>
                         <th>
                             {{ trans('cruds.dataprofil.fields.alamat') }}
@@ -74,13 +74,13 @@
                                 {{ $dataprofil->id ?? '' }}
                             </td>
                             <td>
+                                {{ $dataprofil->tag->name ?? '' }}
+                            </td>
+                            <td>
                                 {{$dataprofil->daftar_usaha_pariwisata ?? '' }}
                             </td>
                             <td>
                                 {{$dataprofil->daftar_sub_jenis_usaha ?? '' }}
-                            </td>
-                            <td>
-                                {{ $dataprofil->name ?? '' }}
                             </td>
                             <td>
                                 {{ $dataprofil->alamat ?? '' }}

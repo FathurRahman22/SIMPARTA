@@ -26,7 +26,7 @@
                             {{ trans('cruds.fasilitasWisata.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.fasilitasWisata.fields.dataprofil') }}
+                            {{ trans('cruds.fasilitasWisata.fields.tag') }}
                         </th>
                         <th>
                             {{ trans('cruds.fasilitasWisata.fields.nama_fasilitasWisata') }}
@@ -55,7 +55,7 @@
                                 {{ $fasilitasWisata->id ?? '' }}
                             </td>
                             <td>
-                                {{ $fasilitasWisata->dataprofil->name ?? '' }}
+                                {{ $fasilitasWisata->tag->name ?? '' }}
                             </td>
                             <td>
                                 {{ $fasilitasWisata->nama_fasilitasWisata ?? '' }}

@@ -26,7 +26,7 @@
                             {{ trans('cruds.agenda.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.agenda.fields.dataprofil') }}
+                            {{ trans('cruds.agenda.fields.tag') }}
                         </th>
                         <th>
                             {{ trans('cruds.agenda.fields.nama_agenda') }}
@@ -59,7 +59,7 @@
                                 {{ $agenda->id ?? '' }}
                             </td>
                             <td>
-                                {{ $agenda->dataprofil->name ?? '' }}
+                                {{ $agenda->tag->name ?? '' }}
                             </td>
                             <td>
                                 {{ $agenda->nama_agenda ?? '' }}

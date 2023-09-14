@@ -4,8 +4,10 @@
     <div class="col-md-6">
         <div class="card mx-4">
             <div class="card-body p-4">
-                <h1>{{ trans('panel.site_title') }}</h1>
-
+                <h1 class="centered-heading">
+                    <img src="/images/logo_disparta.png" alt="Deskripsi Gambar">
+                    {{ trans('panel.site_title') }}
+                </h1>
                 <p class="text-muted">{{ trans('global.login') }}</p>
 
                 @if(session('message'))
@@ -76,4 +78,88 @@
         </div>
     </div>
 </div>
+<style>
+    .col-md-6 {
+        flex: 0 0 50%; /* Mengatur lebar elemen menjadi 50% dari lebar kontainer */
+        max-width: 50%; /* Mengatur lebar maksimum elemen */
+        padding: 15px; /* Menambahkan padding untuk memberikan ruang di sekitar elemen */
+    }
+
+    .card {
+        padding: 20px; /* Menambahkan padding untuk memberikan ruang di sekitar konten dalam elemen */
+        background-color: #fff; /* Mengatur latar belakang elemen */
+        border: 1px solid #ddd; /* Menambahkan border dengan warna abu-abu muda */
+        border-radius: 5px; /* Membuat sudut elemen lebih bulat */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Menambahkan efek bayangan elemen */
+    }
+    .card-body {
+        padding: 20px;
+        background: #cbebff;
+        border: 1px solid #1473e6; /* Ubah warna border sesuai yang Anda inginkan */
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    /* CSS untuk elemen .centered-heading */
+    .centered-heading {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        background: linear-gradient(to bottom, #83b2fc, #faf0f0); /* Warna latar belakang dengan efek linear */
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .centered-heading img {
+        max-width: 200px; /* Mengatur lebar maksimum gambar */
+        max-height: 100px; /* Mengatur tinggi maksimum gambar */
+    }
+
+    h1.centered-heading {
+        font-family: 'Verdana', cursive;
+        font-weight: bold;
+        font-style: italic;
+        font-size: 30px;
+        color: #022170; /* Mengatur warna teks */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Menambahkan efek bayangan pada teks */
+    }
+
+    .text-muted {
+        font-family: 'Verdana', cursive;
+        font-weight: bold;
+        font-size: 20px;
+        color: #4c4b4a; /* Warna font */
+        margin-bottom: 10px; /* Menambahkan jarak bawah */
+    }
+    
+    input-group {
+        margin-bottom: 15px; /* Menambahkan jarak bawah antara elemen input group */
+    }
+
+    .input-group-prepend span {
+        background-color: #1473e6; /* Warna latar belakang ikon */
+        color: #fff; /* Warna ikon */
+        border: 1px solid #1473e6; /* Border ikon */
+        border-radius: 5px; /* Membuat sudut ikon lebih bulat */
+    }
+
+    .input-group input[type="text"],
+    .input-group input[type="password"] {
+        border: 1px solid #ddd; /* Border input field */
+        border-radius: 5px; /* Membuat sudut input field lebih bulat */
+        padding: 10px; /* Menambahkan ruang di sekitar input field */
+    }
+
+    .form-check-input {
+        vertical-align: middle; /* Posisi checkbox di tengah vertikal */
+    }
+
+    .btn {
+        font-family: 'Verdana', cursive; /* Mengganti 'Your Button Font' dengan 'Brush Script MT' */
+        font-weight: bold;
+        font-size: 15px; /* Menambahkan ukuran font, sesuaikan dengan yang Anda inginkan */
+    }
+</style>
 @endsection

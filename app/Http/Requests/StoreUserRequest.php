@@ -27,7 +27,15 @@ class StoreUserRequest extends FormRequest
             ],
             'password' => [
                 'required',
-            ],
+                'min:8',                // Minimal 8 karakter
+                'regex:/[A-Z]/',        // Harus memiliki huruf besar
+                'regex:/[0-9]/',        // Harus memiliki angka
+                'regex:/[^A-Za-z0-9]/', // Harus memiliki simbol
+                'message' => [
+                    'regex' => 'Password harus memiliki setidaknya satu huruf besar, satu angka, dan satu simbol.',
+            
+                ],
+                ], 
             'roles.*' => [
                 'integer',
             ],

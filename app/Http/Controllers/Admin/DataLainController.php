@@ -8,7 +8,7 @@ use App\Http\Requests\MassDestroyDataLainRequest;
 use App\Http\Requests\StoreDataLainRequest;
 use App\Http\Requests\UpdateDataLainRequest;
 use App\Models\DataLain;
-use App\Models\Dataprofil;
+use App\Models\Tag;
 use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -27,23 +27,23 @@ class DataLainController extends Controller
         $filters = [];
         if (!is_null($user->roles[0]->title) && $user->roles[0]->title !== 'Admin') {
             $filters = [
-                ['dataprofil_id', '=', $user->dataprofil_id]
+                ['tag_id', '=', $user->tag_id]
             ];
         }
 
-        $dataLains = DataLain::with(['media', 'dataprofil'])->where($filters)->get();
-        $dataprofils = Dataprofil::get();
+        $dataLains = DataLain::with(['media', 'tag'])->where($filters)->get();
+        $tags = Tag::get();
 
-        return view('admin.dataLains.index', compact('dataLains', 'dataprofils'));
+        return view('admin.dataLains.index', compact('dataLains', 'tags'));
     }
 
     public function create()
     {
         abort_if(Gate::denies('data_lain_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $dataprofils = Dataprofil::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $tags = Tag::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.dataLains.create', compact('dataprofils'));
+        return view('admin.dataLains.create', compact('tags'));
     }
 
     public function store(StoreDataLainRequest $request)
@@ -61,10 +61,10 @@ class DataLainController extends Controller
     {
         abort_if(Gate::denies('data_lain_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $dataprofils = Dataprofil::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-        $dataLain->load('dataprofil');
+        $tags = Tag::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $dataLain->load('tag');
 
-        return view('admin.dataLains.edit', compact('dataLain', 'dataprofils'));
+        return view('admin.dataLains.edit', compact('dataLain', 'tags'));
     }
 
     public function update(UpdateDataLainRequest $request, DataLain $dataLain)

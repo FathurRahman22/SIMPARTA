@@ -160,7 +160,7 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 38,
-                'title' => 'museum_access',
+                'title' => 'data_access',
             ],
             [
                 'id'    => 39,

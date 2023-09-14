@@ -37,7 +37,8 @@ class CreateDataLainsTable extends Migration
             $table->string('investasi')->nullable();
             $table->integer('laki_laki')->nullable();
             $table->integer('perempuan')->nullable();
-            $table->integer('tki');
+            $table->integer('tki')->nullable();
+            $table->string('statusizin')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

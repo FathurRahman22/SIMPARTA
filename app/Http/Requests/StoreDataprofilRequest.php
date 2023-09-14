@@ -17,9 +17,8 @@ class StoreDataprofilRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => [
-                'string',
-                'required',
+            'tag_id' => [
+                'required'
             ],
             'description' => [
                 'string',

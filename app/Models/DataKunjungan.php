@@ -22,7 +22,7 @@ class DataKunjungan extends Model
 
     protected $fillable = [
         //Mancanegara
-         'dataprofil_id',
+         'tag_id',
          'asean',
          'malaysia',
          'filipina',
@@ -134,9 +134,9 @@ class DataKunjungan extends Model
     //     'JUNREJO'           => 'SULAWESI',
     // ];
 
-    public function dataprofil()
+    public function tag()
     {
-        return $this->belongsTo(Dataprofil::class, 'dataprofil_id');
+        return $this->belongsTo(Tag::class, 'tag_id');
     }
     protected function serializeDate(DateTimeInterface $date)
     {

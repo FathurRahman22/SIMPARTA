@@ -17,7 +17,7 @@ class StoreDataKunjunganRequest extends FormRequest
     public function rules()
     {
         return [
-            'dataprofil_id' => [
+            'tag_id' => [
                 'required'
             ],
             'asean' => [

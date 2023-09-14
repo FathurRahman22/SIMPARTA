@@ -8,7 +8,7 @@ use App\Http\Requests\MassDestroyAgendaRequest;
 use App\Http\Requests\StoreAgendaRequest;
 use App\Http\Requests\UpdateAgendaRequest;
 use App\Models\Agenda;
-use App\Models\Dataprofil;
+use App\Models\Tag;
 use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -27,23 +27,23 @@ class AgendaController extends Controller
         $filters = [];
         if (!is_null($user->roles[0]->title) && $user->roles[0]->title !== 'Admin') {
             $filters = [
-                ['dataprofil_id', '=', $user->dataprofil_id]
+                ['tag_id', '=', $user->tag_id]
             ];
         }
 
-        $agendas = Agenda::with(['media', 'dataprofil'])->where($filters)->get();
-        $dataprofils = Dataprofil::get();
+        $agendas = Agenda::with(['media', 'tag'])->where($filters)->get();
+        $tags = Tag::get();
 
-        return view('admin.agendas.index', compact('agendas', 'dataprofils'));
+        return view('admin.agendas.index', compact('agendas', 'tags'));
     }
 
     public function create()
     {
         abort_if(Gate::denies('agenda_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $dataprofils = Dataprofil::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $tags = Tag::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.agendas.create', compact('dataprofils'));
+        return view('admin.agendas.create', compact('tags'));
     }
 
     public function store(StoreAgendaRequest $request)
@@ -65,10 +65,10 @@ class AgendaController extends Controller
     {
         abort_if(Gate::denies('agenda_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $dataprofils = Dataprofil::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-        $agenda->load('dataprofil');
+        $tags = Tag::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $agenda->load('tag');
 
-        return view('admin.agendas.edit', compact('agenda', 'dataprofils'));
+        return view('admin.agendas.edit', compact('agenda', 'tags'));
     }
 
     public function update(UpdateAgendaRequest $request, Agenda $agenda)

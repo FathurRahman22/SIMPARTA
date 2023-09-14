@@ -26,7 +26,7 @@
                             {{ trans('cruds.dataLain.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.dataLain.fields.dataprofil') }}
+                            {{ trans('cruds.dataLain.fields.tag') }}
                         </th>
                         <th>
                             {{ trans('cruds.dataLain.fields.idproyek') }}
@@ -113,6 +113,10 @@
                             {{ trans('cruds.dataLain.fields.tki') }}
                         </th>
                         <th>
+                            {{ trans('cruds.dataLain.fields.tki') }}
+                        </th>
+                        
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -127,7 +131,7 @@
                                 {{ $dataLain->id ?? '' }}
                             </td>
                             <td>
-                                {{ $dataLain->dataprofil->name ?? '' }}
+                                {{ $dataLain->tag->name ?? '' }}
                             </td>
                             <td>
                                 {{ $dataLain->idproyek ?? '' }}
@@ -212,6 +216,13 @@
                             </td>
                             <td>
                                 {{ $dataLain->tki ?? '' }}
+                            </td>
+                            <td>
+                                @if($dataLain->idproyek != null)
+                                    Berizin
+                                @else
+                                    Tidak Berizin
+                                @endif
                             </td>
                             <td>
                                 @can('data_lain_show')

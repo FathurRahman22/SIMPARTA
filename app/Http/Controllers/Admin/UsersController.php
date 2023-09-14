@@ -11,7 +11,7 @@ use App\Models\User;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Models\Dataprofil;
+use App\Models\Tag;
 
 class UsersController extends Controller
 {
@@ -29,9 +29,9 @@ class UsersController extends Controller
         abort_if(Gate::denies('user_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $roles = Role::pluck('title', 'id');
-        $dataprofils = Dataprofil::get();
+        $tags = Tag::get();
 
-        return view('admin.users.create', compact('roles', 'dataprofils'));
+        return view('admin.users.create', compact('roles', 'tags'));
     }
 
     public function store(StoreUserRequest $request)
@@ -47,11 +47,11 @@ class UsersController extends Controller
         abort_if(Gate::denies('user_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $roles = Role::pluck('title', 'id');
-        $dataprofils = Dataprofil::get();
+        $tags = Tag::get();
 
         $user->load('roles');
 
-        return view('admin.users.edit', compact('roles', 'user', 'dataprofils'));
+        return view('admin.users.edit', compact('roles', 'user', 'tags'));
     }
 
     public function update(UpdateUserRequest $request, User $user)

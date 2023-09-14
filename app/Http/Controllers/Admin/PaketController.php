@@ -8,7 +8,7 @@ use App\Http\Requests\MassDestroyPaketRequest;
 use App\Http\Requests\StorePaketRequest;
 use App\Http\Requests\UpdatePaketRequest;
 use App\Models\Paket;
-use App\Models\Dataprofil;
+use App\Models\Tag;
 use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -29,21 +29,21 @@ class PaketController extends Controller
         $filters = [];
         if (!is_null($user->roles[0]->title) && $user->roles[0]->title !== 'Admin') {
             $filters = [
-                ['dataprofil_id', '=', $user->dataprofil_id]
+                ['tag_id', '=', $user->tag_id]
             ];
         }
        
-        $pakets = Paket::with(['media', 'dataprofil'])->where($filters)->get();
-        $dataprofils = Dataprofil::get();
+        $pakets = Paket::with(['media', 'tag'])->where($filters)->get();
+        $tags = Tag::get();
 
-        return view('admin.pakets.index', compact('pakets', 'dataprofils'));
+        return view('admin.pakets.index', compact('pakets', 'tags'));
     }
 
     public function create()
     {
         abort_if(Gate::denies('paket_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $dataprofils = Dataprofil::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-        return view('admin.pakets.create', compact('dataprofils'));
+        $tags = Tag::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        return view('admin.pakets.create', compact('tags'));
     }
 
     public function store(StorePaketRequest $request)
@@ -76,10 +76,10 @@ class PaketController extends Controller
     {
         $pdf_paketWisata = $paket->getMedia('pdf_paketWisata');
         abort_if(Gate::denies('paket_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $dataprofils = Dataprofil::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-        $paket->load('dataprofil');
+        $tags = Tag::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $paket->load('tag');
 
-        return view('admin.pakets.edit', compact('paket', 'dataprofils', 'pdf_paketWisata'));
+        return view('admin.pakets.edit', compact('paket', 'tags', 'pdf_paketWisata'));
     }
 
     public function update(UpdatePaketRequest $request, Paket $paket)

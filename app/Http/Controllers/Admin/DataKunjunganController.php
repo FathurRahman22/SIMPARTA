@@ -7,7 +7,7 @@ use App\Http\Requests\MassDestroyDataKunjunganRequest;
 use App\Http\Requests\StoreDataKunjunganRequest;
 use App\Http\Requests\UpdateDataKunjunganRequest;
 use App\Models\DataKunjungan;
-use App\Models\Dataprofil;
+use App\Models\Tag;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,22 +23,22 @@ class DataKunjunganController extends Controller
         $filters = [];
         if (!is_null($user->roles[0]->title) && $user->roles[0]->title !== 'Admin') {
             $filters = [
-                ['dataprofil_id', '=', $user->dataprofil_id]
+                ['tag_id', '=', $user->tag_id]
             ];
         }
 
-        $dataKunjungans = DataKunjungan::with(['dataprofil'])->where($filters)->get();
-        $dataprofils = Dataprofil::get();
+        $dataKunjungans = DataKunjungan::with(['tag'])->where($filters)->get();
+        $tags = Tag::get();
 
-        return view('admin.dataKunjungans.index', compact('dataKunjungans', 'dataprofils'));
+        return view('admin.dataKunjungans.index', compact('dataKunjungans', 'tags'));
     }
 
     public function create()
     {
         abort_if(Gate::denies('data_kunjungan_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $dataprofils = Dataprofil::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $tags = Tag::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.dataKunjungans.create', compact('dataprofils'));
+        return view('admin.dataKunjungans.create', compact('tags'));
     }
 
     public function store(StoreDataKunjunganRequest $request)
@@ -51,10 +51,10 @@ class DataKunjunganController extends Controller
     public function edit(DataKunjungan $dataKunjungan)
     {
         abort_if(Gate::denies('data_kunjungan_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $dataprofils = Dataprofil::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-        $dataKunjungan->load('dataprofil');
+        $tags = Tag::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $dataKunjungan->load('tag');
 
-        return view('admin.dataKunjungans.edit', compact('dataKunjungan', 'dataprofils'));
+        return view('admin.dataKunjungans.edit', compact('dataKunjungan', 'tags'));
         //return view('admin.dataKunjungans.edit', compact('dataKunjungan'));
     }
 

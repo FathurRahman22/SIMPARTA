@@ -123,6 +123,9 @@ class StoreDataLainRequest extends FormRequest // Mengganti nama kelas StoreOrde
                 'min:-12345678910111213',
                 'max:12345678910111213',
             ],
+            'statusizin' => [
+                'nullable',
+            ]
         ];
     }
 

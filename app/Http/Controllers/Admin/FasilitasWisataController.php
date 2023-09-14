@@ -8,7 +8,7 @@ use App\Http\Requests\MassDestroyFasilitasWisataRequest;
 use App\Http\Requests\StoreFasilitasWisataRequest;
 use App\Http\Requests\UpdateFasilitasWisataRequest;
 use App\Models\FasilitasWisata;
-use App\Models\Dataprofil;
+use App\Models\Tag;
 use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -27,23 +27,23 @@ class FasilitasWisataController extends Controller
         $filters = [];
         if (!is_null($user->roles[0]->title) && $user->roles[0]->title !== 'Admin') {
             $filters = [
-                ['dataprofil_id', '=', $user->dataprofil_id]
+                ['tag_id', '=', $user->tag_id]
             ];
         }
 
-        $fasilitasWisatas = FasilitasWisata::with(['media', 'dataprofil'])->where($filters)->get();
-        $dataprofils = Dataprofil::get();
+        $fasilitasWisatas = FasilitasWisata::with(['media', 'tag'])->where($filters)->get();
+        $tags = Tag::get();
 
-        return view('admin.fasilitasWisatas.index', compact('fasilitasWisatas', 'dataprofils'));
+        return view('admin.fasilitasWisatas.index', compact('fasilitasWisatas', 'tags'));
     }
 
     public function create()
     {
         abort_if(Gate::denies('fasilitasWisata_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $dataprofils = Dataprofil::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $tags = Tag::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.fasilitasWisatas.create', compact('dataprofils'));
+        return view('admin.fasilitasWisatas.create', compact('tags'));
     }
 
     public function store(StoreFasilitasWisataRequest $request)
@@ -65,10 +65,10 @@ class FasilitasWisataController extends Controller
     {
         abort_if(Gate::denies('fasilitasWisata_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $dataprofils = Dataprofil::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-        $fasilitasWisata->load('dataprofil');
+        $tags = Tag::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $fasilitasWisata->load('tag');
 
-        return view('admin.fasilitasWisatas.edit', compact('fasilitasWisata', 'dataprofils'));
+        return view('admin.fasilitasWisatas.edit', compact('fasilitasWisata', 'tags'));
     }
 
     public function update(UpdateFasilitasWisataRequest $request, FasilitasWisata $fasilitasWisata)

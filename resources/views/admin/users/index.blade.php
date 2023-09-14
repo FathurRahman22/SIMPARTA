@@ -26,6 +26,9 @@
                             {{ trans('cruds.user.fields.id') }}
                         </th>
                         <th>
+                            {{ trans('cruds.user.fields.tag') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.user.fields.name') }}
                         </th>
                         <th>
@@ -50,6 +53,9 @@
                             </td>
                             <td>
                                 {{ $user->id ?? '' }}
+                            </td>
+                            <td>
+                                {{ $user->tag->name ?? '' }}
                             </td>
                             <td>
                                 {{ $user->name ?? '' }}

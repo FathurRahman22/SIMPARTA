@@ -11,19 +11,21 @@
                 @method('PUT')
                 @csrf
                 <div class="form-group">
-                    <label class="required">{{ trans('cruds.dataLain.fields.dataprofil') }}</label>
-                    <select class="form-control {{ $errors->has('dataprofil') ? 'is-invalid' : '' }}" name="dataprofil_id"
-                        @foreach ($dataprofils as $id => $entry)
-                            <option value="{{ $id }}" {{ old('dataprofil_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
-                        @endforeach
-                    </select>
-                    @if ($errors->has('dataprofil_id'))
-                        <div class="invalid-feedback">
-                            {{ $errors->first('dataprofil_id') }}
-                        </div>
+                <label for="tag_id">{{ trans('cruds.dataLain.fields.tag') }}</label>
+                <select class="form-control select2 {{ $errors->has('tag') ? 'is-invalid' : '' }}" name="tag_id" id="tag_id">
+                    @foreach($tags as $id => $entry)
+                    @if(auth()->user()->roles[0]->title == 'Admin' || auth()->user()->tag_id == $id)
+                        <option value="{{ $id }}" {{ old('tag_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
                     @endif
-                    <span class="help-block">{{ trans('cruds.dataLain.fields.dataprofil_helper') }}</span>
-                </div>
+                    @endforeach
+                </select>
+                @if($errors->has('tag'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('tag') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.dataLain.fields.tag_helper') }}</span>
+            </div>
                 <div class="form-group">
                     <label class="" for="idproyek">{{ trans('cruds.dataLain.fields.idproyek') }}</label>
                     <input class="form-control {{ $errors->has('idproyek') ? 'is-invalid' : '' }}" type="text"
@@ -428,6 +430,16 @@
                     <span class="help-block">{{ trans('cruds.dataLain.fields.tki_helper') }}</span>
                 </div>
                 <div class="form-group">
+    <label class="" for="statusizin">{{ trans('cruds.dataLain.fields.statusizin') }}</label>
+    <input class="form-control {{ $errors->has('statusizin') ? 'is-invalid' : '' }}" type="text" name="statusizin" id="statusizin" value="Tidak Berizin" readonly>
+    @if ($errors->has('statusizin'))
+        <div class="invalid-feedback">
+            {{ $errors->first('statusizin') }}
+        </div>
+    @endif
+    <span class="help-block">{{ trans('cruds.dataLain.fields.statusizin_helper') }}</span>
+</div>
+                <div class="form-group">
                     <button class="btn btn-danger" type="submit">
                         {{ trans('global.save') }}
                     </button>
@@ -538,6 +550,20 @@
 
     investasiInput.addEventListener("input", function() {
         formatRupiah(this);
+    });
+</script>
+<script>
+    // Menggunakan JavaScript untuk memantau perubahan pada input "idproyek"
+    document.getElementById('idproyek').addEventListener('input', function () {
+        var idproyekValue = this.value;
+        var statusizinInput = document.getElementById('statusizin');
+
+        // Jika idproyek tidak kosong, set statusizin menjadi "Berizin", jika tidak set "Tidak Berizin"
+        if (idproyekValue.trim() !== '') {
+            statusizinInput.value = 'Berizin';
+        } else {
+            statusizinInput.value = 'Tidak Berizin';
+        }
     });
 </script>
 @endsection

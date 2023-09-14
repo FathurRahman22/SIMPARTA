@@ -9,8 +9,8 @@ class CreateRelationshipFieldsToPaketsTable extends Migration
     public function up()
     {
         Schema::table('pakets', function (Blueprint $table) {
-            $table->unsignedBigInteger('dataprofil_id')->nullable();
-            $table->foreign('dataprofil_id', 'dataprofil_fk_0311034')->references('id')->on('dataprofils');
+            $table->unsignedBigInteger('tag_id')->nullable();
+            $table->foreign('tag_id', 'tag_fk_0311034')->references('id')->on('tags');
             //
         });
         // Schema::create('order_tickets', function (Blueprint $table) {

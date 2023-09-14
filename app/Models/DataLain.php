@@ -122,7 +122,7 @@ class DataLain extends Model implements HasMedia
 
     protected $fillable = [
         // 'status_izin',
-        'dataprofil_id',
+        'tag_id',
         'idproyek',
         'nib',
         'npwp',
@@ -152,6 +152,7 @@ class DataLain extends Model implements HasMedia
         'laki_laki',
         'perempuan',
         'tki',
+        'statusizin',
         // 'jumlah_tiket',
         // 'tanggal_pemesanan',
         // 'valid',
@@ -161,9 +162,9 @@ class DataLain extends Model implements HasMedia
         // 'updated_at',
         // 'deleted_at',
     ];
-    public function dataprofil()
+    public function tag()
     {
-        return $this->belongsTo(Dataprofil::class, 'dataprofil_id');
+        return $this->belongsTo(Tag::class, 'tag_id');
     }
     // public function registerMediaConversions(Media $media = null): void
     // {

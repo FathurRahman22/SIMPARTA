@@ -19,6 +19,22 @@
             <form method="POST" action="{{ route('admin.dataprofils.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
+                <label for="tag_id">{{ trans('cruds.dataprofil.fields.tag') }}</label>
+                <select class="form-control select2 {{ $errors->has('tag') ? 'is-invalid' : '' }}" name="tag_id" id="tag_id">
+                    @foreach($tags as $id => $entry)
+                    @if(auth()->user()->roles[0]->title == 'Admin' || auth()->user()->tag_id == $id)
+                        <option value="{{ $id }}" {{ old('tag_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                    @endif
+                    @endforeach
+                </select>
+                @if($errors->has('tag'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('tag') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.dataprofil.fields.tag_helper') }}</span>
+            </div>
+                <div class="form-group">
     <label class="" for="daftar_usaha_pariwisata">{{ trans('cruds.dataprofil.fields.daftar_usaha_pariwisata') }}</label>
     <select class="form-control" name="daftar_usaha_pariwisata" id="daftar_usaha_pariwisata">
         <option value="Hotel dan Akomodasi Lainnya" {{ old('daftar_usaha_pariwisata') == 'Hotel dan Akomodasi Lainnya' ? 'selected' : '' }}>Hotel dan Akomodasi Lainnya</option>                    
@@ -64,17 +80,7 @@
                    
             </div>
           
-                <div class="form-group">
-                    <label class="required" for="name">{{ trans('cruds.dataprofil.fields.name') }}</label>
-                    <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text"
-                        name="name" id="name" value="{{ old('name', '') }}" required>
-                    @if ($errors->has('name'))
-                        <div class="invalid-feedback">
-                            {{ $errors->first('name') }}
-                        </div>
-                    @endif
-                    <span class="help-block">{{ trans('cruds.dataprofil.fields.name_helper') }}</span>
-                </div>
+           
                 
                 <div class="form-group">
                     <label class="" for="kecamatan">{{ trans('cruds.dataprofil.fields.kecamatan') }}</label>

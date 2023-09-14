@@ -123,6 +123,10 @@ class UpdateDataLainRequest extends FormRequest
                 'min:-12345678910111213',
                 'max:12345678910111213',
             ],
+            'statusizin' => [
+                'nullable',
+            ],
+
         ];
     }
 

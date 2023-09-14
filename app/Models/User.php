@@ -41,12 +41,12 @@ class User extends Authenticatable
         'created_at',
         'updated_at',
         'deleted_at',
-        'dataprofil_id',
+        'tag_id',
     ];
 
-    public function dataprofil()
+    public function tag()
     {
-        return $this->belongsTo('App\Models\Dataprofil');
+        return $this->belongsTo('App\Models\Tag');
     }
 
     public function getIsAdminAttribute()

@@ -26,7 +26,7 @@
                             {{ trans('cruds.paket.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.paket.fields.dataprofil') }}
+                            {{ trans('cruds.paket.fields.tag') }}
                         </th>
                         <th>
                             {{ trans('cruds.paket.fields.nama_paketWisata') }}
@@ -56,7 +56,7 @@
                                 {{ $paket->id ?? '' }}
                             </td>
                             <td>
-                                {{ $paket->dataprofil->name ?? '' }}
+                                {{ $paket->tag->name ?? '' }}
                             </td>
                             <td>
                                 {{ $paket->nama_paketWisata ?? '' }}

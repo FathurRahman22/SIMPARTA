@@ -34,7 +34,7 @@ class Dataprofil extends Model implements HasMedia
     protected $fillable = [
         'daftar_usaha_pariwisata',
         'daftar_sub_jenis_usaha',
-        'name',
+        'tag_id',
         'alamat',
         'kecamatan',
         'kelurahan',
@@ -108,5 +108,9 @@ class Dataprofil extends Model implements HasMedia
     public function users()
     {
         return $this->hasMany('App\Models\User');
+    }
+    public function tag()
+    {
+        return $this->belongsTo(Tag::class, 'tag_id');
     }
 }

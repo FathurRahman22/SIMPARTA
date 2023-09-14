@@ -101,13 +101,13 @@
                 </ul>
             </li>
         @endcan
-        @can('museum_access')
+        @can('data_access')
             <li class="c-sidebar-nav-dropdown {{ request()->is("admin/dataprofils*") ? "c-show" : "" }}  {{ request()->is("admin/dataLains*") ? "c-show" : "" }} {{ request()->is("admin/fasilitasWisatas*") ? "c-show" : "" }} {{ request()->is("admin/pakets*") ? "c-show" : "" }} {{ request()->is("admin/agendas*") ? "c-show" : "" }}{{ request()->is("admin/data-kunjungans*") ? "c-show" : "" }}">
                 <a class="c-sidebar-nav-dropdown-toggle" href="#">
                 <i class="fa-fw fas fa-database c-sidebar-nav-icon"></i>
 
                     </i>
-                    {{ trans('cruds.museum.title') }}
+                    {{ trans('cruds.data.title') }}
                 </a>
                 <ul class="c-sidebar-nav-dropdown-items">
                     

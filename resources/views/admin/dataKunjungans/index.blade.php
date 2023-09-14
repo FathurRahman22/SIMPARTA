@@ -50,8 +50,12 @@
                             {{ trans('cruds.dataKunjungan.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.dataKunjungan.fields.dataprofil') }}
+                            {{ trans('cruds.dataKunjungan.fields.tag') }}
                         </th>
+                        <th>
+                            {{ trans('cruds.dataprofil.fields.daftar_usaha_pariwisata') }}
+                        </th>
+                        
                         <th>
                             {{ trans('cruds.dataKunjungan.fields.total_mancanegara') }}
                         </th>
@@ -79,7 +83,10 @@
                                 {{ $dataKunjungan->id ?? '' }}
                             </td>
                             <td>
-                                {{ $dataKunjungan->dataprofil->name ?? '' }}
+                                {{ $dataKunjungan->tag->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $dataKunjungan->dataprofil->daftar_usaha_pariwisata ?? '' }}
                             </td>
                             <td>
                                 {{ $dataKunjungan->total_mancanegara ?? '' }}

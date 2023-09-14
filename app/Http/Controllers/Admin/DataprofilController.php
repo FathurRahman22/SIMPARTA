@@ -8,12 +8,14 @@ use App\Http\Requests\MassDestroyDataprofilRequest;
 use App\Http\Requests\StoreDataprofilRequest;
 use App\Http\Requests\UpdateDataprofilRequest;
 use App\Models\Dataprofil;
+use App\Models\Tag;
 use Gate;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 class DataprofilController extends Controller
 {
@@ -23,17 +25,25 @@ class DataprofilController extends Controller
     {
         abort_if(Gate::denies('dataprofil_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $dataprofils = Dataprofil::with(['media'])->get();
+        $user = Auth::user();
+        $filters = [];
+        if (!is_null($user->roles[0]->title) && $user->roles[0]->title !== 'Admin') {
+            $filters = [
+                ['tag_id', '=', $user->tag_id]
+            ];
+        }
+       
+        $dataprofils = Dataprofil::with(['media', 'tag'])->where($filters)->get();
+        $tags = Tag::get();
 
-
-        return view('admin.dataprofils.index', compact('dataprofils'));
+        return view('admin.dataprofils.index', compact('dataprofils', 'tags'));
     }
 
     public function create()
     {
         abort_if(Gate::denies('dataprofil_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        return view('admin.dataprofils.create');
+        $tags = Tag::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        return view('admin.dataprofils.create', compact('tags'));
     }
 
     public function store(StoreDataprofilRequest $request)
@@ -69,8 +79,12 @@ class DataprofilController extends Controller
     {
         abort_if(Gate::denies('dataprofil_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.dataprofils.edit', compact('dataprofil'));
+        $tags = Tag::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $dataprofil->load('tag');
+
+        return view('admin.dataprofils.edit', compact('dataprofil', 'tags'));
     }
+        
 
     public function update(UpdateDataprofilRequest $request, Dataprofil $dataprofil)
     {

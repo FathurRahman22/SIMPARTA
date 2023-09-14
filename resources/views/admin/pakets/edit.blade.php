@@ -11,18 +11,20 @@
             @method('PUT')
             @csrf
             <div class="form-group">
-                    <label class="required">{{ trans('cruds.paket.fields.dataprofil') }}</label>
-                    <select class="form-control {{ $errors->has('dataprofil') ? 'is-invalid' : '' }}" name="dataprofil_id"
-                        @foreach($dataprofils as $id => $entry)
-                        <option value="{{ $id }}" {{ old('dataprofil_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
-                    @endforeach
-                    </select>
-                    @if ($errors->has('dataprofil_id'))
-                        <div class="invalid-feedback">
-                            {{ $errors->first('dataprofil_id') }}
-                        </div>
+                <label for="tag_id">{{ trans('cruds.paket.fields.tag') }}</label>
+                <select class="form-control select2 {{ $errors->has('tag') ? 'is-invalid' : '' }}" name="tag_id" id="tag_id">
+                    @foreach($tags as $id => $entry)
+                    @if(auth()->user()->roles[0]->title == 'Admin' || auth()->user()->tag_id == $id)
+                        <option value="{{ $id }}" {{ old('tag_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
                     @endif
-                    <span class="help-block">{{ trans('cruds.paket.fields.dataprofil_helper') }}</span>
+                    @endforeach
+                </select>
+                @if($errors->has('tag'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('tag') }}
+                    </div>
+                    @endif
+                    <span class="help-block">{{ trans('cruds.paket.fields.tag_helper') }}</span>
             </div>
             <div class="form-group">
                 <label class="required" for="nama_paketWisata">{{ trans('cruds.paket.fields.nama_paketWisata') }}</label>

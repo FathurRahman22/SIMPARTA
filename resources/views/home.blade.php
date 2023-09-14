@@ -687,7 +687,7 @@ var marker = L.marker([{{ $dataprofil->latitude }}, {{ $dataprofil->longitude }}
     const categoryImage = document.getElementById("categoryImage");
     const arrowImage = document.createElement("img");
     arrowImage.src = "/images/panah.png"; // Ganti dengan gambar panah yang sesuai
-    arrowImage.style.marginLeft = "5px"; // Sesuaikan gaya sesuai kebutuhan
+    arrowImage.style.marginLeft = "1px"; // Sesuaikan gaya sesuai kebutuhan
 
     // Create a variable to track the state (open/closed)
     let isSubcategoriesOpen = false;

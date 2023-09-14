@@ -29,7 +29,7 @@ class Paket extends Model implements HasMedia
     ];
 
     protected $fillable = [
-        'dataprofil_id',
+        'tag_id',
         'nama_paketWisata',
         'deskripsi_paketWisata',
         'created_at',
@@ -64,9 +64,9 @@ class Paket extends Model implements HasMedia
     
         return $pdfFiles;
     }
-    public function dataprofil()
+    public function tag()
     {
-        return $this->belongsTo(Dataprofil::class, 'dataprofil_id');
+        return $this->belongsTo(Tag::class, 'tag_id');
     }
 
     protected function serializeDate(DateTimeInterface $date)

@@ -4,13 +4,13 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRealtionshipFieldsToDataKunjungansTable extends Migration
+class CreateRelationshipFieldsToDataprofilsTable extends Migration
 {
     public function up()
     {
-        Schema::table('data_kunjungans', function (Blueprint $table) {
-            $table->unsignedBigInteger('dataprofil_id')->nullable();
-            $table->foreign('dataprofil_id', 'dataprofil_fk_0311009')->references('id')->on('dataprofils');
+        Schema::table('dataprofils', function (Blueprint $table) {
+            $table->unsignedBigInteger('tag_id')->nullable();
+            $table->foreign('tag_id', 'tag_fk_0311000')->references('id')->on('tags');
             //
         });
         // Schema::create('order_tickets', function (Blueprint $table) {

@@ -2,19 +2,20 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as Middleware;
+use Closure;
+use Illuminate\Http\Request;
 
-class VerifyCsrfToken extends Middleware
+class VerifyCsrfToken
 {
     /**
-     * The URIs that should be excluded from CSRF verification.
+     * Handle an incoming request.
      *
-     * @var array
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
+     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    protected $except = [
-        //
-        'https://museum-bahari.telenurse.web.id/api',
-        'https://museum-bahari.telenurse.web.id/api/tickets/order',
-        'https://museum-bahari.telenurse.web.id/api/link/submit',
-    ];
+    public function handle(Request $request, Closure $next)
+    {
+        return $next($request);
+    }
 }

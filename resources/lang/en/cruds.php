@@ -45,6 +45,8 @@ return [
         'fields'         => [
             'id'                       => 'ID',
             'id_helper'                => ' ',
+            'tag'                     => 'Jasa Usaha Pariwisata',
+            'tag_helper'              => ' ',
             'name'                     => 'Name',
             'name_helper'              => ' ',
             'email'                    => 'Email',
@@ -70,8 +72,8 @@ return [
         'title_singular' => 'On Going',
     ],
     'tag' => [
-        'title'          => 'Kategori',
-        'title_singular' => 'Kategori',
+        'title'          => 'Jasa Usaha Pariwisata',
+        'title_singular' => 'Jasa Usaha Pariwisata',
         'fields'         => [
             'id'                => 'ID',
             'id_helper'         => ' ',
@@ -139,8 +141,8 @@ return [
         'fields'         => [
             'id'                                => 'ID',
             'id_helper'                         => ' ',
-            'dataprofil'                     => 'Wisata',
-            'dataprofil_helper'              => ' ',
+            'tag'                     => 'Jenis Usaha Pariwisata',
+            'tag_helper'              => ' ',
             'nama_fasilitasWisata'              => 'Nama Fasilitas Wisata',
             'nama_fasilitasWisata_helper'       => ' ',
             'deskripsi_fasilitasWisata'         => 'Deskripsi Nama Fasilitas Wisata',
@@ -161,8 +163,8 @@ return [
         'fields'         => [
             'id'                            => 'ID',
             'id_helper'                     => ' ',
-            'dataprofil'                     => 'Wisata',
-            'dataprofil_helper'              => ' ',
+            'tag'                     => 'Jenis Usaha Pariwisata',
+            'tag_helper'              => ' ',
             'nama_agenda'              => 'Nama Agenda',
             'nama_agenda_helper'       => ' ',
             'deskripsi_agenda'         => 'Deskripsi Agenda',
@@ -183,7 +185,7 @@ return [
             // 'kode_barang_helper'      => ' ',
         ],
     ],
-    'museum' => [
+    'data' => [
         'title'          => 'Data',
         'title_singular' => 'Data',
     ],
@@ -193,8 +195,8 @@ return [
         'fields'         => [
             'id'                       => 'ID',
             'id_helper'                => ' ',
-            'dataprofil'                    => 'Wisata',
-            'dataprofil_helper'             => ' ',
+            'tag'                    => 'Jenis Usaha Pariwisata',
+            'tag_helper'             => ' ',
             'idproyek'                 => 'ID Proyek',
             'idproyek_helper'          => ' ',
             'nib'                      => 'NIB',
@@ -279,14 +281,14 @@ return [
         'fields'         => [
             'id'                  => 'ID',
             'id_helper'           => ' ',
-            'daftar_usaha_pariwisata'   => 'Jasa Usaha Pariwisata',
+            'daftar_usaha_pariwisata'   => 'Jenis Usaha Pariwisata',
             'daftar_usaha_pariwisata_helper'   => ' ',
             'daftar_sub_jenis_usaha'   => 'Sub Jenis Usaha Pariwisata',
             'daftar_sub_jenis_usaha_helper'   => ' ',
             'hotel'               => 'Hotel dan Akomodasi Lainnya',
             'hotel_helper'        => '',
-            'name'                => 'Nama',
-            'name_helper'         => ' ',
+            'tag'             => 'Jasa Usaha Pariwisata',
+            'tag_helper'              => ' ',
             'alamat'              => 'Alamat',
             'alamat_helper'       => '',
             'kecamatan'          => 'Kecamatan',
@@ -319,8 +321,8 @@ return [
         'fields'         => [
             'id'                            => 'ID',
             'id_helper'                     => ' ',
-            'dataprofil'                     => 'Wisata',
-            'dataprofil_helper'              => ' ',
+            'tag'                     => 'Jenis Usaha Pariwisata',
+            'tag_helper'              => ' ',
             'nama_paketWisata'              => 'Nama Paket Wisata',
             'nama_paketWisata_helper'       => ' ',
             'deskripsi_paketWisata'         => 'Deskripsi Nama Paket Wisata',
@@ -348,8 +350,8 @@ return [
             //Mancanegara
             'id'                        => 'ID',
             'id_helper'                 => ' ',
-            'dataprofil'                     => 'Wisata',
-            'dataprofil_helper'              => ' ',
+            'tag'                     => 'Jasa Usaha Pariwisata',
+            'tag_helper'              => ' ',
             'asean'                     => 'ASEAN',
             'asean_helper'              => ' ',
             'malaysia'                  => 'Malaysia',

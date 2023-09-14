@@ -29,7 +29,7 @@ class Agenda extends Model implements HasMedia
     ];
 
     protected $fillable = [
-        'dataprofil_id',
+        'tag_id',
         'start_date',
         'end_date',
         'nama_agenda',
@@ -38,9 +38,9 @@ class Agenda extends Model implements HasMedia
         'updated_at',
         'deleted_at',
     ];
-    public function dataprofil()
+    public function tag()
     {
-        return $this->belongsTo(Dataprofil::class, 'dataprofil_id');
+        return $this->belongsTo(Tag::class, 'tag_id');
     }
     public function registerMediaConversions(Media $media = null): void
     {

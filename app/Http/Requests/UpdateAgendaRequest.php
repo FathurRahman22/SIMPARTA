@@ -17,7 +17,7 @@ class UpdateAgendaRequest extends FormRequest
     public function rules()
     {
         return [
-            'dataprofil_id' => [
+            'tag_id' => [
                 'required',
             ],
             'nama_agenda' => [
