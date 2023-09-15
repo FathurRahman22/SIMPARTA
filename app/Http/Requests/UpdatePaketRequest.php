@@ -31,11 +31,6 @@ class UpdatePaketRequest extends FormRequest
             'pdf_paketWisata' => [
                 'array',
             ],
-            // 'kode_paket' => [
-            //     'string',
-            //     'required',
-            //     'unique:pakets,kode_paket,' . request()->route('paket')->id,
-            // ],
         ];
     }
 }

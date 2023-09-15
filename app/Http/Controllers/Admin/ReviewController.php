@@ -20,11 +20,10 @@ class ReviewController extends Controller
     public function index()
     {
         abort_if(Gate::denies('review_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        // Fetch reviews and associated event data from the EventController
+       
         $eventsController = new EventController();
-        $events = $eventsController->getEventData(); // Define the method in EventController to fetch data
+        $events = $eventsController->getEventData(); 
 
-        // Fetch reviews (assuming you have a Review model)
         $reviews = Review::all();
 
         return view('admin.reviews.index', compact('reviews', 'events'));

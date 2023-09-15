@@ -19,16 +19,6 @@ class DataLain extends Model implements HasMedia
     use Auditable;
     use HasFactory;
 
-    // public const STATUS_TIKET_SELECT = [
-    //     'non_aktif' => 'non_aktif',
-    //     'aktif'     => 'aktif',
-    // ];
-
-    // public const STATUS_IZIN_SELECT = [
-    //     'berizin'     => 'Berizin',
-    //     'tidak_berizin' => 'Tidak Berizin',
-    // ];
-
     public const STATUS_PM_SELECT = [
         'PMDN'     => 'PMDN',
     ];

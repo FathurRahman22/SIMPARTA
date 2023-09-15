@@ -2,16 +2,16 @@
 
 namespace App\Http\Requests;
 
-use App\Models\DataLain; // Mengganti OrderTicket dengan DataLain
+use App\Models\DataLain; 
 use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Response;
 
-class StoreDataLainRequest extends FormRequest // Mengganti nama kelas StoreOrderTicketRequest menjadi StoreDataLainRequest
+class StoreDataLainRequest extends FormRequest 
 {
     public function authorize()
     {
-        return Gate::allows('data_lain_create'); // Mengganti 'order_ticket_create' menjadi 'data_lain_create'
+        return Gate::allows('data_lain_create'); 
     }
 
     public function rules()

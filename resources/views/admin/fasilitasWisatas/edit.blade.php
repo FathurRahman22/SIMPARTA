@@ -12,79 +12,70 @@
                 @csrf
                 div class="form-group">
                 <label for="tag_id">{{ trans('cruds.fasilitasWisata.fields.tag') }}</label>
-                <select class="form-control select2 {{ $errors->has('tag') ? 'is-invalid' : '' }}" name="tag_id" id="tag_id">
-                    @foreach($tags as $id => $entry)
-                    @if(auth()->user()->roles[0]->title == 'Admin' || auth()->user()->tag_id == $id)
-                        <option value="{{ $id }}" {{ old('tag_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
-                    @endif
+                <select class="form-control select2 {{ $errors->has('tag') ? 'is-invalid' : '' }}" name="tag_id"
+                    id="tag_id">
+                    @foreach ($tags as $id => $entry)
+                        @if (auth()->user()->roles[0]->title == 'Admin' || auth()->user()->tag_id == $id)
+                            <option value="{{ $id }}" {{ old('tag_id') == $id ? 'selected' : '' }}>
+                                {{ $entry }}</option>
+                        @endif
                     @endforeach
                 </select>
-                @if($errors->has('tag'))
+                @if ($errors->has('tag'))
                     <div class="invalid-feedback">
                         {{ $errors->first('tag') }}
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.fasilitasWisata.fields.tag_helper') }}</span>
-            </div>
-                <div class="form-group">
-                    <label class="required"
-                        for="nama_fasilitasWisata">{{ trans('cruds.fasilitasWisata.fields.nama_fasilitasWisata') }}</label>
-                    <input class="form-control {{ $errors->has('nama_fasilitasWisata') ? 'is-invalid' : '' }}"
-                        type="text" name="nama_fasilitasWisata" id="nama_fasilitasWisata"
-                        value="{{ old('nama_fasilitasWisata', $fasilitasWisata->nama_fasilitasWisata) }}" required>
-                    @if ($errors->has('nama_fasilitasWisata'))
-                        <div class="invalid-feedback">
-                            {{ $errors->first('nama_fasilitasWisata') }}
-                        </div>
-                    @endif
-                    <span class="help-block">{{ trans('cruds.fasilitasWisata.fields.nama_fasilitasWisata_helper') }}</span>
-
-                </div>
-                <div class="form-group">
-                    <label
-                        for="deskripsi_fasilitasWisata">{{ trans('cruds.fasilitasWisata.fields.deskripsi_fasilitasWisata') }}</label>
-                    <textarea class="form-control ckeditor {{ $errors->has('deskripsi_fasilitasWisata') ? 'is-invalid' : '' }}"
-                        name="deskripsi_fasilitasWisata" id="deskripsi_fasilitasWisata">{!! old('deskripsi_fasilitasWisata', $fasilitasWisata->deskripsi_fasilitasWisata) !!}</textarea>
-                    @if ($errors->has('deskripsi_fasilitasWisata'))
-                        <div class="invalid-feedback">
-                            {{ $errors->first('deskripsi_fasilitasWisata') }}
-                        </div>
-                    @endif
-                    <span
-                        class="help-block">{{ trans('cruds.fasilitasWisata.fields.deskripsi_fasilitasWisata_helper') }}</span>
-
-                </div>
-                <div class="form-group">
-                    <label class="required"
-                        for="gambar_fasilitasWisata">{{ trans('cruds.fasilitasWisata.fields.gambar_fasilitasWisata') }}</label>
-                    <div class="needsclick dropzone {{ $errors->has('gambar_fasilitasWisata') ? 'is-invalid' : '' }}"
-                        id="gambar_fasilitasWisata-dropzone">
-                    </div>
-                    @if ($errors->has('gambar_fasilitasWisata'))
-                        <div class="invalid-feedback">
-                            {{ $errors->first('gambar_fasilitasWisata') }}
-                        </div>
-                    @endif
-                    <span
-                        class="help-block">{{ trans('cruds.fasilitasWisata.fields.gambar_fasilitasWisata_helper') }}</span>
-                </div>
-                {{-- <div class="form-group">
-                <label class="required" for="kode_fasilitasWisata">{{ trans('cruds.fasilitasWisata.fields.kode_fasilitasWisata') }}</label>
-                <input class="form-control {{ $errors->has('kode_fasilitasWisata') ? 'is-invalid' : '' }}" type="text" name="kode_fasilitasWisata" id="kode_fasilitasWisata" value="{{ old('kode_fasilitasWisata', $fasilitasWisata->kode_fasilitasWisata) }}" required>
-                @if ($errors->has('kode_fasilitasWisata'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('kode_fasilitasWisata') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.fasilitasWisata.fields.kode_fasilitasWisata_helper') }}</span>
-            </div> --}}
-                <div class="form-group">
-                    <button class="btn btn-danger" type="submit">
-                        {{ trans('global.save') }}
-                    </button>
-                </div>
-            </form>
         </div>
+        <div class="form-group">
+            <label class="required"
+                for="nama_fasilitasWisata">{{ trans('cruds.fasilitasWisata.fields.nama_fasilitasWisata') }}</label>
+            <input class="form-control {{ $errors->has('nama_fasilitasWisata') ? 'is-invalid' : '' }}" type="text"
+                name="nama_fasilitasWisata" id="nama_fasilitasWisata"
+                value="{{ old('nama_fasilitasWisata', $fasilitasWisata->nama_fasilitasWisata) }}" required>
+            @if ($errors->has('nama_fasilitasWisata'))
+                <div class="invalid-feedback">
+                    {{ $errors->first('nama_fasilitasWisata') }}
+                </div>
+            @endif
+            <span class="help-block">{{ trans('cruds.fasilitasWisata.fields.nama_fasilitasWisata_helper') }}</span>
+
+        </div>
+        <div class="form-group">
+            <label
+                for="deskripsi_fasilitasWisata">{{ trans('cruds.fasilitasWisata.fields.deskripsi_fasilitasWisata') }}</label>
+            <textarea class="form-control ckeditor {{ $errors->has('deskripsi_fasilitasWisata') ? 'is-invalid' : '' }}"
+                name="deskripsi_fasilitasWisata" id="deskripsi_fasilitasWisata">{!! old('deskripsi_fasilitasWisata', $fasilitasWisata->deskripsi_fasilitasWisata) !!}</textarea>
+            @if ($errors->has('deskripsi_fasilitasWisata'))
+                <div class="invalid-feedback">
+                    {{ $errors->first('deskripsi_fasilitasWisata') }}
+                </div>
+            @endif
+            <span class="help-block">{{ trans('cruds.fasilitasWisata.fields.deskripsi_fasilitasWisata_helper') }}</span>
+
+        </div>
+        <div class="form-group">
+            <label class="required"
+                for="gambar_fasilitasWisata">{{ trans('cruds.fasilitasWisata.fields.gambar_fasilitasWisata') }}</label>
+            <div class="needsclick dropzone {{ $errors->has('gambar_fasilitasWisata') ? 'is-invalid' : '' }}"
+                id="gambar_fasilitasWisata-dropzone">
+            </div>
+            @if ($errors->has('gambar_fasilitasWisata'))
+                <div class="invalid-feedback">
+                    {{ $errors->first('gambar_fasilitasWisata') }}
+                </div>
+            @endif
+            <span class="help-block">{{ trans('cruds.fasilitasWisata.fields.gambar_fasilitasWisata_helper') }}</span>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-danger" type="submit">
+                {{ trans('global.save') }}
+            </button>
+        </div>
+        </form>
+    </div>
     </div>
 @endsection
 
@@ -135,7 +126,7 @@
             },
             error: function(file, response) {
                 if ($.type(response) === 'string') {
-                    var message = response //dropzone sends it's own error messages in string
+                    var message = response
                 } else {
                     var message = response.errors.file
                 }

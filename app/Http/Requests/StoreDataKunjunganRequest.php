@@ -20,6 +20,9 @@ class StoreDataKunjunganRequest extends FormRequest
             'tag_id' => [
                 'required'
             ],
+            'dataprofil_id' => [
+                'nullable'
+            ],
             'asean' => [
                 'nullable', 'integer'
             ],

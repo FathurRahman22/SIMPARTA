@@ -122,21 +122,13 @@ class DataKunjungan extends Model
         'end_date'
     ];
 
-    // public const SUBMISSIONLINK_TYPE2_SELECT = [
-    //     'BATU'           => 'ASEAN',
-    //     'BUMIAJI'        => 'TIMUR TENGAH',
-    //     'JUNREJO'        => 'EROPA',
-    // ];
-
-    // public const SUBMISSIONLINK_TYPE3_SELECT = [
-    //     'OROOROOMBO'        => 'KALIMATAN',
-    //     'BULUKERTO'         => 'JAWA',
-    //     'JUNREJO'           => 'SULAWESI',
-    // ];
-
     public function tag()
     {
         return $this->belongsTo(Tag::class, 'tag_id');
+    }
+    public function dataprofil()
+    {
+    return $this->belongsTo(Dataprofil::class, 'tag_id', 'tag_id');
     }
     protected function serializeDate(DateTimeInterface $date)
     {

@@ -20,6 +20,9 @@ class UpdateDataKunjunganRequest extends FormRequest
             'tag_id' => [
                 'nullable'
             ],
+            'dataprofil_id' => [
+                'nullable'
+            ],
             'asean' => [
                 'nullable', 'integer'
             ],

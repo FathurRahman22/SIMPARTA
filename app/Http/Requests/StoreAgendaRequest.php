@@ -31,11 +31,6 @@ class StoreAgendaRequest extends FormRequest
             'gambar_agenda.*' => [
                 'required',
             ],
-            // 'kode_barang' => [
-            //     'string',
-            //     'required',
-            //     'unique:barangs',
-            // ],
         ];
     }
 }

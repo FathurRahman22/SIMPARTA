@@ -60,20 +60,6 @@ class DataprofilController extends Controller
 
         return redirect()->route('admin.dataprofils.index');
     }
-    // public function store(StoreEventRequest $request)
-    // {
-    //     $event = Event::create($request->all());
-
-    //     foreach ($request->input('event_photo', []) as $file) {
-    //         $event->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('event_photo');
-    //     }
-
-    //     if ($media = $request->input('ck-media', false)) {
-    //         Media::whereIn('id', $media)->update(['model_id' => $event->id]);
-    //     }
-
-    //     return redirect()->route('admin.events.index');
-    // }
 
     public function edit(Dataprofil $dataprofil)
     {

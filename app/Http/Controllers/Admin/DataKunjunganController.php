@@ -7,6 +7,8 @@ use App\Http\Requests\MassDestroyDataKunjunganRequest;
 use App\Http\Requests\StoreDataKunjunganRequest;
 use App\Http\Requests\UpdateDataKunjunganRequest;
 use App\Models\DataKunjungan;
+use App\Http\Controllers\DataprofilController;
+use App\Models\Dataprofil;
 use App\Models\Tag;
 use Gate;
 use Illuminate\Http\Request;
@@ -29,17 +31,36 @@ class DataKunjunganController extends Controller
 
         $dataKunjungans = DataKunjungan::with(['tag'])->where($filters)->get();
         $tags = Tag::get();
+        $dataprofils = Dataprofil::get();
 
-        return view('admin.dataKunjungans.index', compact('dataKunjungans', 'tags'));
+        return view('admin.dataKunjungans.index', compact('dataKunjungans', 'tags', 'dataprofils'));
     }
 
     public function create()
-    {
-        abort_if(Gate::denies('data_kunjungan_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $tags = Tag::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+{
+    abort_if(Gate::denies('data_kunjungan_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+    $tags = Tag::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+    $dataprofils = Dataprofil::get();
 
-        return view('admin.dataKunjungans.create', compact('tags'));
+    // Ambil tag_id yang dipilih (jika ada)
+    $selectedTagId = request('tag_id');
+
+    // Inisialisasi daftar_jenis_usaha dengan nilai default jika tag_id tidak terpilih
+    $daftarJenisUsaha = '';
+
+    // Cek apakah tag_id terpilih, jika iya, ambil daftar_jenis_usaha dari Dataprofil
+    if ($selectedTagId) {
+        $dataprofil = Dataprofil::where('tag_id', $selectedTagId)->first();
+        if ($dataprofil) {
+            $daftarJenisUsaha = $dataprofil->tag->daftar_jenis_usaha;
+        }
     }
+
+    return view('admin.dataKunjungans.create', compact('tags', 'dataprofils', 'daftarJenisUsaha'));
+}
+
+
+
 
     public function store(StoreDataKunjunganRequest $request)
     {

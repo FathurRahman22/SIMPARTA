@@ -31,11 +31,6 @@ class StorePaketRequest extends FormRequest
             'gambar_paketWisata.*' => [
                 'required',
             ],
-            // 'kode_paket' => [
-            //     'string',
-            //     'required',
-            //     'unique:pakets',
-            // ],
         ];
     }
 }

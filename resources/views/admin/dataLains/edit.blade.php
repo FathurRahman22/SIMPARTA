@@ -11,21 +11,23 @@
                 @method('PUT')
                 @csrf
                 <div class="form-group">
-                <label for="tag_id">{{ trans('cruds.dataLain.fields.tag') }}</label>
-                <select class="form-control select2 {{ $errors->has('tag') ? 'is-invalid' : '' }}" name="tag_id" id="tag_id">
-                    @foreach($tags as $id => $entry)
-                    @if(auth()->user()->roles[0]->title == 'Admin' || auth()->user()->tag_id == $id)
-                        <option value="{{ $id }}" {{ old('tag_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                    <label for="tag_id">{{ trans('cruds.dataLain.fields.tag') }}</label>
+                    <select class="form-control select2 {{ $errors->has('tag') ? 'is-invalid' : '' }}" name="tag_id"
+                        id="tag_id">
+                        @foreach ($tags as $id => $entry)
+                            @if (auth()->user()->roles[0]->title == 'Admin' || auth()->user()->tag_id == $id)
+                                <option value="{{ $id }}" {{ old('tag_id') == $id ? 'selected' : '' }}>
+                                    {{ $entry }}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                    @if ($errors->has('tag'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('tag') }}
+                        </div>
                     @endif
-                    @endforeach
-                </select>
-                @if($errors->has('tag'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('tag') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.dataLain.fields.tag_helper') }}</span>
-            </div>
+                    <span class="help-block">{{ trans('cruds.dataLain.fields.tag_helper') }}</span>
+                </div>
                 <div class="form-group">
                     <label class="" for="idproyek">{{ trans('cruds.dataLain.fields.idproyek') }}</label>
                     <input class="form-control {{ $errors->has('idproyek') ? 'is-invalid' : '' }}" type="text"
@@ -104,7 +106,8 @@
                             {{ trans('global.pleaseSelect') }}</option>
                         @foreach (App\Models\DataLain::JENIS_PERUSAHAAN_SELECT as $key => $label)
                             <option value="{{ $key }}"
-                                {{ old('jenis_perusahaan', $dataLain->jenis_perusahaan) === (string) $key ? 'selected' : '' }}>{{ $label }}
+                                {{ old('jenis_perusahaan', $dataLain->jenis_perusahaan) === (string) $key ? 'selected' : '' }}>
+                                {{ $label }}
                             </option>
                         @endforeach
                     </select>
@@ -124,7 +127,8 @@
                             {{ trans('global.pleaseSelect') }}</option>
                         @foreach (App\Models\DataLain::RISIKO_PROYEK_SELECT as $key => $label)
                             <option value="{{ $key }}"
-                                {{ old('risiko_proyek', $dataLain->risiko_proyek) === (string) $key ? 'selected' : '' }}>{{ $label }}
+                                {{ old('risiko_proyek', $dataLain->risiko_proyek) === (string) $key ? 'selected' : '' }}>
+                                {{ $label }}
                             </option>
                         @endforeach
                     </select>
@@ -144,7 +148,8 @@
                             {{ trans('global.pleaseSelect') }}</option>
                         @foreach (App\Models\DataLain::SKALA_USAHA_SELECT as $key => $label)
                             <option value="{{ $key }}"
-                                {{ old('skala_usaha', $dataLain->skala_usaha) === (string) $key ? 'selected' : '' }}>{{ $label }}
+                                {{ old('skala_usaha', $dataLain->skala_usaha) === (string) $key ? 'selected' : '' }}>
+                                {{ $label }}
                             </option>
                         @endforeach
                     </select>
@@ -171,7 +176,7 @@
                 <div class="form-group">
                     <label class="" for="kecamatan">{{ trans('cruds.dataLain.fields.kecamatan') }}</label>
                     <select class="form-control" name="kecamatan" id="kecamatan">
-                        <option value="Batu" {{ $dataLain->kecamatan == 'Batu' ? 'selected' : '' }}>Batu</option>                  
+                        <option value="Batu" {{ $dataLain->kecamatan == 'Batu' ? 'selected' : '' }}>Batu</option>
                         <option value="Bumiaji" {{ $dataLain->kecamatan == 'Bumiaji' ? 'selected' : '' }}>Bumiaji</option>
                         <option value="Junrejo" {{ $dataLain->kecamatan == 'Junrejo' ? 'selected' : '' }}>Junrejo</option>
                     </select>
@@ -180,7 +185,7 @@
                             {{ $errors->first('kecamatan') }}
                         </div>
                     @endif
-                    <span class="help-block">{{ trans('cruds.dataprofil.fields.kecamatan_helper')}}</span>
+                    <span class="help-block">{{ trans('cruds.dataprofil.fields.kecamatan_helper') }}</span>
                 </div>
 
                 <div class="form-group">
@@ -188,12 +193,7 @@
                     <select class="form-control" name="kelurahan" id="kelurahan">
                         <!-- Opsi kelurahan diisi menggunakan JavaScript -->
                     </select>
-                    {{-- <select class="form-control {{ $errors->has('kelurahan') ? 'is-invalid' : '' }}" name="kelurahan" id="kelurahan" >
-                    <option value disabled {{ old('kelurahan', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
-                    @foreach (App\Models\dataLain::KELURAHAN_SELECT as $key => $label)
-                        <option value="{{ $key }}" {{ old('kelurahan', '') === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
-                    @endforeach
-                </select> --}}
+
                     @if ($errors->has('kelurahan'))
                         <div class="invalid-feedback">
                             {{ $errors->first('kelurahan') }}
@@ -217,7 +217,8 @@
                 <div class="form-group">
                     <label class="" for="judul_kbli">{{ trans('cruds.dataLain.fields.judul_kbli') }}</label>
                     <input class="form-control {{ $errors->has('judul_kbli') ? 'is-invalid' : '' }}" type="text"
-                        name="judul_kbli" id="judul_kbli" value="{{ old('judul_kbli', $dataLain->judul_kbli) }}" step="1">
+                        name="judul_kbli" id="judul_kbli" value="{{ old('judul_kbli', $dataLain->judul_kbli) }}"
+                        step="1">
                     @if ($errors->has('judul_kbli'))
                         <div class="invalid-feedback">
                             {{ $errors->first('judul_kbli') }}
@@ -234,7 +235,8 @@
                             {{ trans('global.pleaseSelect') }}</option>
                         @foreach (App\Models\DataLain::SEKTOR_SELECT as $key => $label)
                             <option value="{{ $key }}"
-                                {{ old('sektor', $dataLain->sektor) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                                {{ old('sektor', $dataLain->sektor) === (string) $key ? 'selected' : '' }}>
+                                {{ $label }}</option>
                         @endforeach
                     </select>
                     @if ($errors->has('sektor'))
@@ -297,7 +299,8 @@
                     <label class=""
                         for="mesin_peralatan">{{ trans('cruds.dataLain.fields.mesin_peralatan') }}</label>
                     <input class="form-control {{ $errors->has('mesin_peralatan') ? 'is-invalid' : '' }}" type="text"
-                        name="mesin_peralatan" id="mesin_peralatan" value="{{ old('mesin_peralatan', $dataLain->mesin_peralatan) }}">
+                        name="mesin_peralatan" id="mesin_peralatan"
+                        value="{{ old('mesin_peralatan', $dataLain->mesin_peralatan) }}">
                     @if ($errors->has('mesin_peralatan'))
                         <div class="invalid-feedback">
                             {{ $errors->first('mesin_peralatan') }}
@@ -307,10 +310,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label class=""
-                        for="mesin_import">{{ trans('cruds.dataLain.fields.mesin_import') }}</label>
+                    <label class="" for="mesin_import">{{ trans('cruds.dataLain.fields.mesin_import') }}</label>
                     <input class="form-control {{ $errors->has('mesin_import') ? 'is-invalid' : '' }}" type="text"
-                        name="mesin_import" id="mesin_import" value="{{ old('mesin_import', $dataLain->mesin_import) }}">
+                        name="mesin_import" id="mesin_import"
+                        value="{{ old('mesin_import', $dataLain->mesin_import) }}">
                     @if ($errors->has('mesin_import'))
                         <div class="invalid-feedback">
                             {{ $errors->first('mesin_import') }}
@@ -323,7 +326,8 @@
                     <label class=""
                         for="pembelian_tanah">{{ trans('cruds.dataLain.fields.pembelian_tanah') }}</label>
                     <input class="form-control {{ $errors->has('pembelian_tanah') ? 'is-invalid' : '' }}" type="text"
-                        name="pembelian_tanah" id="pembelian_tanah" value="{{ old('pembelian_tanah', $dataLain->pembelian_tanah) }}">
+                        name="pembelian_tanah" id="pembelian_tanah"
+                        value="{{ old('pembelian_tanah', $dataLain->pembelian_tanah) }}">
                     @if ($errors->has('pembelian_tanah'))
                         <div class="invalid-feedback">
                             {{ $errors->first('pembelian_tanah') }}
@@ -380,18 +384,6 @@
                     <span class="help-block">{{ trans('cruds.dataLain.fields.investasi_helper') }}</span>
                 </div>
 
-                <!-- <div class="form-group">
-                    <label class="" for="tki">{{ trans('cruds.dataLain.fields.tki') }}</label>
-                    <input class="form-control {{ $errors->has('tki') ? 'is-invalid' : '' }}" type="number"
-                        name="tki" id="tki" value="{{ old('tki', $dataLain->tki) }}">
-                    @if ($errors->has('tki'))
-                        <div class="invalid-feedback">
-                            {{ $errors->first('tki') }}
-                        </div>
-                    @endif
-                    <span class="help-block">{{ trans('cruds.dataLain.fields.tki_helper') }}</span>
-                </div> -->
-
                 <div class="form-group">
                     <label class=""
                         for="jumlah_pegawai">{{ trans('cruds.dataLain.fields.jumlah_pegawai') }}</label>
@@ -399,7 +391,8 @@
                 <div class="form-group">
                     <label class="" for="laki-laki">{{ trans('cruds.dataLain.fields.laki_laki') }}</label>
                     <input class="form-control {{ $errors->has('laki_laki') ? 'is-invalid' : '' }}" type="number"
-                        name="laki_laki" id="laki_laki" value="{{ old('laki_laki', $dataLain->laki_laki) }}" step="1">
+                        name="laki_laki" id="laki_laki" value="{{ old('laki_laki', $dataLain->laki_laki) }}"
+                        step="1">
                     @if ($errors->has('laki_laki'))
                         <div class="invalid-feedback">
                             {{ $errors->first('laki_laki') }}
@@ -409,7 +402,8 @@
 
                     <label class="" for="perempuan">{{ trans('cruds.dataLain.fields.perempuan') }}</label>
                     <input class="form-control {{ $errors->has('perempuan') ? 'is-invalid' : '' }}" type="number"
-                        name="perempuan" id="perempuan" value="{{ old('perempuan', $dataLain->perempuan) }}" step="1">
+                        name="perempuan" id="perempuan" value="{{ old('perempuan', $dataLain->perempuan) }}"
+                        step="1">
                     @if ($errors->has('perempuan'))
                         <div class="invalid-feedback">
                             {{ $errors->first('perempuan') }}
@@ -418,8 +412,7 @@
                     <span class="help-block">{{ trans('cruds.dataLain.fields.perempuan_helper') }}</span>
                 </div>
                 <div class="form-group">
-                    <label class=""
-                        for="tki">{{ trans('cruds.dataLain.fields.tki') }}</label>
+                    <label class="" for="tki">{{ trans('cruds.dataLain.fields.tki') }}</label>
                     <input class="form-control {{ $errors->has('tki') ? 'is-invalid' : '' }}" type="number"
                         name="tki" id="tki" value="{{ old('tki', $dataLain->tki) }}" step="1">
                     @if ($errors->has('tki'))
@@ -430,15 +423,16 @@
                     <span class="help-block">{{ trans('cruds.dataLain.fields.tki_helper') }}</span>
                 </div>
                 <div class="form-group">
-    <label class="" for="statusizin">{{ trans('cruds.dataLain.fields.statusizin') }}</label>
-    <input class="form-control {{ $errors->has('statusizin') ? 'is-invalid' : '' }}" type="text" name="statusizin" id="statusizin" value="Tidak Berizin" readonly>
-    @if ($errors->has('statusizin'))
-        <div class="invalid-feedback">
-            {{ $errors->first('statusizin') }}
-        </div>
-    @endif
-    <span class="help-block">{{ trans('cruds.dataLain.fields.statusizin_helper') }}</span>
-</div>
+                    <label class="" for="statusizin">{{ trans('cruds.dataLain.fields.statusizin') }}</label>
+                    <input class="form-control {{ $errors->has('statusizin') ? 'is-invalid' : '' }}" type="text"
+                        name="statusizin" id="statusizin" value="{{ old('statusizin', '') }}" readonly>
+                    @if ($errors->has('statusizin'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('statusizin') }}
+                        </div>
+                    @endif
+                    <span class="help-block">{{ trans('cruds.dataLain.fields.statusizin_helper') }}</span>
+                </div>
                 <div class="form-group">
                     <button class="btn btn-danger" type="submit">
                         {{ trans('global.save') }}
@@ -450,6 +444,23 @@
 @endsection
 
 @section('scripts')
+    <script>
+        function updateStatusizin() {
+            var idproyekValue = document.getElementById('idproyek').value;
+            var statusizinInput = document.getElementById('statusizin');
+
+            if (idproyekValue.trim() !== '') {
+                statusizinInput.value = 'Berizin';
+            } else {
+                statusizinInput.value = 'Tidak Berizin';
+            }
+        }
+
+        window.addEventListener('load', updateStatusizin);
+
+        document.getElementById('idproyek').addEventListener('input', updateStatusizin);
+    </script>
+
     <script>
         // Ambil elemen select untuk kecamatan dan kelurahan
         var kecamatanSelect = document.getElementById('kecamatan');
@@ -497,73 +508,59 @@
         });
     </script>
     <script>
-    // Fungsi untuk mengubah input menjadi format Rupiah
-    function formatRupiah(inputElement) {
-        // Mengambil nilai input
-        var value = inputElement.value.replace(/\D/g, "");
-        
-        // Mengubah nilai menjadi format Rupiah dengan angka desimal
-        var formattedValue = new Intl.NumberFormat("id-ID", {
-            style: "currency",
-            currency: "IDR",
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 2
-        }).format(value);
-        
-        // Mengganti nilai input dengan format Rupiah
-        inputElement.value = formattedValue;
-    }
+        // Fungsi untuk mengubah input menjadi format Rupiah
+        function formatRupiah(inputElement) {
+            // Mengambil nilai input
+            var value = inputElement.value.replace(/\D/g, "");
 
-    // Mendapatkan elemen input untuk kolom yang membutuhkan format Rupiah
-    var mesinPeralatanInput = document.getElementById("mesin_peralatan");
-    var mesinImportInput = document.getElementById("mesin_import");
-    var pembelianTanahInput = document.getElementById("pembelian_tanah");
-    var bangunanInput = document.getElementById("bangunan");
-    var modalKerjaInput = document.getElementById("modal_kerja");
-    var lainLainInput = document.getElementById("lain_lain");
-    var investasiInput = document.getElementById("investasi");
+            // Mengubah nilai menjadi format Rupiah dengan angka desimal
+            var formattedValue = new Intl.NumberFormat("id-ID", {
+                style: "currency",
+                currency: "IDR",
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2
+            }).format(value);
 
-    // Menambahkan event listener untuk setiap elemen input yang membutuhkan format Rupiah
-    mesinPeralatanInput.addEventListener("input", function() {
-        formatRupiah(this);
-    });
-
-    mesinImportInput.addEventListener("input", function() {
-        formatRupiah(this);
-    });
-
-    pembelianTanahInput.addEventListener("input", function() {
-        formatRupiah(this);
-    });
-
-    bangunanInput.addEventListener("input", function() {
-        formatRupiah(this);
-    });
-
-    modalKerjaInput.addEventListener("input", function() {
-        formatRupiah(this);
-    });
-
-    lainLainInput.addEventListener("input", function() {
-        formatRupiah(this);
-    });
-
-    investasiInput.addEventListener("input", function() {
-        formatRupiah(this);
-    });
-</script>
-<script>
-    // Menggunakan JavaScript untuk memantau perubahan pada input "idproyek"
-    document.getElementById('idproyek').addEventListener('input', function () {
-        var idproyekValue = this.value;
-        var statusizinInput = document.getElementById('statusizin');
-
-        // Jika idproyek tidak kosong, set statusizin menjadi "Berizin", jika tidak set "Tidak Berizin"
-        if (idproyekValue.trim() !== '') {
-            statusizinInput.value = 'Berizin';
-        } else {
-            statusizinInput.value = 'Tidak Berizin';
+            // Mengganti nilai input dengan format Rupiah
+            inputElement.value = formattedValue;
         }
-    });
-</script>
+
+        // Mendapatkan elemen input untuk kolom yang membutuhkan format Rupiah
+        var mesinPeralatanInput = document.getElementById("mesin_peralatan");
+        var mesinImportInput = document.getElementById("mesin_import");
+        var pembelianTanahInput = document.getElementById("pembelian_tanah");
+        var bangunanInput = document.getElementById("bangunan");
+        var modalKerjaInput = document.getElementById("modal_kerja");
+        var lainLainInput = document.getElementById("lain_lain");
+        var investasiInput = document.getElementById("investasi");
+
+        // Menambahkan event listener untuk setiap elemen input yang membutuhkan format Rupiah
+        mesinPeralatanInput.addEventListener("input", function() {
+            formatRupiah(this);
+        });
+
+        mesinImportInput.addEventListener("input", function() {
+            formatRupiah(this);
+        });
+
+        pembelianTanahInput.addEventListener("input", function() {
+            formatRupiah(this);
+        });
+
+        bangunanInput.addEventListener("input", function() {
+            formatRupiah(this);
+        });
+
+        modalKerjaInput.addEventListener("input", function() {
+            formatRupiah(this);
+        });
+
+        lainLainInput.addEventListener("input", function() {
+            formatRupiah(this);
+        });
+
+        investasiInput.addEventListener("input", function() {
+            formatRupiah(this);
+        });
+    </script>
 @endsection
