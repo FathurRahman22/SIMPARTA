@@ -17,6 +17,36 @@ use Auth;
 
 class DataKunjunganController extends Controller
 {
+    public function getCategoryTotals()
+    {
+        // Hitung total mancanegara dan nusantara untuk kategori Hotel dan Akomodasi Lainnya
+        $hotelMancanegaraTotal = DataKunjungan::whereHas('dataprofil', function ($query) {
+            $query->where('daftar_usaha_pariwisata', 'Hotel dan Akomodasi Lainnya');
+        })->sum('total_mancanegara');
+
+        $hotelNusantaraTotal = DataKunjungan::whereHas('dataprofil', function ($query) {
+            $query->where('daftar_usaha_pariwisata', 'Hotel dan Akomodasi Lainnya');
+        })->sum('total_nusantara');
+
+        // Hitung total mancanegara dan nusantara untuk kategori Daya Tarik Wisata
+        $dtwMancanegaraTotal = DataKunjungan::whereHas('dataprofil', function ($query) {
+            $query->where('daftar_usaha_pariwisata', 'Daya Tarik Wisata');
+        })->sum('total_mancanegara');
+
+        $dtwNusantaraTotal = DataKunjungan::whereHas('dataprofil', function ($query) {
+            $query->where('daftar_usaha_pariwisata', 'Daya Tarik Wisata');
+        })->sum('total_nusantara');
+
+        // Anda dapat menghitung total untuk kategori lain dengan cara yang serupa
+
+        return [
+            'hotelMancanegaraTotal' => $hotelMancanegaraTotal,
+            'hotelNusantaraTotal' => $hotelNusantaraTotal,
+            'dtwMancanegaraTotal' => $dtwMancanegaraTotal,
+            'dtwNusantaraTotal' => $dtwNusantaraTotal,
+            // Tambahkan total untuk kategori lain di sini
+        ];
+    }
     public function index()
     {
         abort_if(Gate::denies('data_kunjungan_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -33,31 +63,33 @@ class DataKunjunganController extends Controller
         $tags = Tag::get();
         $dataprofils = Dataprofil::get();
 
-        return view('admin.dataKunjungans.index', compact('dataKunjungans', 'tags', 'dataprofils'));
+        $categoryTotalsDKW = $this->getCategoryTotals();
+
+        return view('admin.dataKunjungans.index', compact('dataKunjungans', 'tags', 'dataprofils', 'categoryTotalsDKW'));
     }
 
     public function create()
-{
-    abort_if(Gate::denies('data_kunjungan_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-    $tags = Tag::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-    $dataprofils = Dataprofil::get();
+    {
+        abort_if(Gate::denies('data_kunjungan_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $tags = Tag::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $dataprofils = Dataprofil::get();
 
-    // Ambil tag_id yang dipilih (jika ada)
-    $selectedTagId = request('tag_id');
+        // Ambil tag_id yang dipilih (jika ada)
+        $selectedTagId = request('tag_id');
 
-    // Inisialisasi daftar_jenis_usaha dengan nilai default jika tag_id tidak terpilih
-    $daftarJenisUsaha = '';
+        // Inisialisasi daftar_jenis_usaha dengan nilai default jika tag_id tidak terpilih
+        $daftarJenisUsaha = '';
 
-    // Cek apakah tag_id terpilih, jika iya, ambil daftar_jenis_usaha dari Dataprofil
-    if ($selectedTagId) {
-        $dataprofil = Dataprofil::where('tag_id', $selectedTagId)->first();
-        if ($dataprofil) {
-            $daftarJenisUsaha = $dataprofil->tag->daftar_jenis_usaha;
+        // Cek apakah tag_id terpilih, jika iya, ambil daftar_jenis_usaha dari Dataprofil
+        if ($selectedTagId) {
+            $dataprofil = Dataprofil::where('tag_id', $selectedTagId)->first();
+            if ($dataprofil) {
+                $daftarJenisUsaha = $dataprofil->tag->daftar_jenis_usaha;
+            }
         }
-    }
 
-    return view('admin.dataKunjungans.create', compact('tags', 'dataprofils', 'daftarJenisUsaha'));
-}
+        return view('admin.dataKunjungans.create', compact('tags', 'dataprofils', 'daftarJenisUsaha'));
+    }
 
 
 
@@ -108,7 +140,7 @@ class DataKunjunganController extends Controller
 
         return response(null, Response::HTTP_NO_CONTENT);
     }
-    
+
     public function filter(Request $request)
     {
         // Ambil input tanggal dari permintaan
@@ -124,7 +156,7 @@ class DataKunjunganController extends Controller
         }
 
         $dataKunjungans = $dataKunjungans->get();
-
-        return view('admin.dataKunjungans.index', compact('dataKunjungans'));
+        $categoryTotalsDKW = $this->getCategoryTotals();
+        return view('admin.dataKunjungans.index', compact('dataKunjungans','categoryTotalsDKW'));
     }
 }

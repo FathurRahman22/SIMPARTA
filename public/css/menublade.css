@@ -1,0 +1,90 @@
+/* Default styles for the sidebar */
+.c-sidebar {
+    font-family: Verdana, sans-serif;
+    background-color: #022170;
+    /* Change to your preferred background color */
+    color: #fff;
+    /* Change to your preferred text color */
+    display: none;
+    /* Sidebar hidden by default */
+}
+
+.c-sidebar-brand-full {
+    text-align: center;
+    /* Align content to center */
+    padding: 20px;
+    color: #ff6b6b;
+    font-size: 18px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.c-sidebar-brand-full img {
+    max-width: 100px;
+    max-height: 50px;
+    margin-bottom: 10px;
+    /* Add some spacing between the logo and user info */
+}
+
+.c-sidebar-brand-full p {
+    margin: 0;
+    font-size: 20px;
+    color: #fff;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.c-sidebar a {
+    color: #fff;
+    /* Change to your preferred link color */
+    text-decoration: none;
+    /* Remove underlines from links */
+}
+
+/* Show the sidebar when the menu button is clicked */
+#sidebar-toggle:checked+.c-sidebar {
+    display: block;
+    transform: translateX(-250px);
+    /* Initial position off the screen */
+    transition: transform 0.3s;
+}
+
+/* Styles for the sidebar when it's visible on larger screens */
+@media (min-width: 768px) {
+    .c-sidebar {
+        width: 250px;
+        /* Adjust the width as needed */
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        overflow-y: auto;
+        transition: width 0.3s;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+        /* Add shadow for depth */
+        display: block;
+        /* Always visible on larger screens */
+    }
+
+    .c-sidebar-brand {
+        padding: 20px;
+        text-align: center;
+        /* Center the brand text */
+        font-size: 24px;
+        /* Increase font size for brand */
+        font-weight: bold;
+        /* Make brand text bold */
+        color: #ff6b6b;
+        /* Brand text color */
+    }
+}
+
+/* Show the sidebar on smaller screens (e.g., mobile and tablet) */
+@media (max-width: 767px) {
+    .c-sidebar {
+        display: block;
+        /* Always visible on smaller screens */
+    }
+}

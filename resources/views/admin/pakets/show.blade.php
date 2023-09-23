@@ -23,12 +23,12 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>
-                                {{ trans('cruds.paket.fields.dataprofil') }}
+                        <th>
+                                {{ trans('cruds.paket.fields.tag') }}
                             </th>
                             <td>
-                                {{ $paket->dataprofil->name ?? '' }}
-                            </td>
+                                    {{ $paket->tag->name ?? '' }}
+                                </td>
                         </tr>
                         <tr>
                             <th>

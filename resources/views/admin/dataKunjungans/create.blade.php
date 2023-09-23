@@ -6,6 +6,10 @@
         </div>
 
         <div class="card-body">
+            @php
+                $dataprofilsExist = App\Models\Dataprofil::count() > 0;
+            @endphp
+            @if ($dataprofilsExist)
             <form method="POST" action="{{ route('admin.data-kunjungans.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
@@ -1286,6 +1290,11 @@
                     </button>
                 </div>
             </form>
+            @else
+                <div class="alert alert-danger">
+                    Inputkan Data Profil Terlebih Dahulu
+                </div>
+            @endif
         </div>
     </div>
 @endsection

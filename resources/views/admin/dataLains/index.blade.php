@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/datalainnya/data_lainnya_index.css') }}">
     @can('data_lain_create')
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
@@ -11,7 +12,7 @@
     @endcan
     <div class="card">
         <div class="card-header">
-            {{ trans('cruds.dataLain.title_singular') }} {{ trans('global.list') }}
+        {{ trans('global.list') }} {{ trans('cruds.dataLain.title_singular') }}
         </div>
 
         <div class="card-body">
@@ -112,9 +113,16 @@
                             <th>
                                 {{ trans('cruds.dataLain.fields.tki') }}
                             </th>
-                            <th>
-                                {{ trans('cruds.dataLain.fields.tki') }}
-                            </th>
+                            @unless (Auth::user()->roles[0]->title === 'Admin')
+                                <th style="display: none;">
+                                    {{ trans('cruds.dataLain.fields.statusizin') }}
+                                </th>
+                            @else
+                                <th>
+                                    {{ trans('cruds.dataLain.fields.statusizin') }}
+                                </th>
+                            @endunless
+
 
                             <th>
                                 &nbsp;
@@ -217,13 +225,19 @@
                                 <td>
                                     {{ $dataLain->tki ?? '' }}
                                 </td>
-                                <td>
-                                    @if ($dataLain->idproyek != null)
-                                        Berizin
-                                    @else
-                                        Tidak Berizin
-                                    @endif
-                                </td>
+                                @unless (Auth::user()->roles[0]->title === 'Admin')
+                                    <td style="display: none;"></td>
+                                @else
+                                    <td>
+                                        @if ($dataLain->idproyek != null)
+                                            Berizin
+                                        @else
+                                            Tidak Berizin
+                                        @endif
+                                    </td>
+                                @endunless
+
+
                                 <td>
                                     @can('data_lain_show')
                                         <a class="btn btn-xs btn-primary"

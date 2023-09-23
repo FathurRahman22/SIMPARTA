@@ -61,6 +61,9 @@
                             {{ $errors->first('password') }}
                         </div>
                     @endif
+                    <div class="password-warning invalid-feedback" style="display: none;">
+                        Password harus memiliki setidaknya satu huruf besar, satu angka, dan satu simbol.
+                    </div>
                     <span class="help-block">{{ trans('cruds.user.fields.password_helper') }}</span>
                 </div>
                 <div class="form-group">
@@ -97,12 +100,19 @@
     <script>
         const passwordInput = document.getElementById('password');
         const togglePassword = document.getElementById('togglePassword');
-
+        const passwordWarning = document.querySelector('.password-warning');
+    
         togglePassword.addEventListener('click', function() {
             const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
             passwordInput.setAttribute('type', type);
             togglePassword.classList.toggle('fa-eye');
             togglePassword.classList.toggle('fa-eye-slash');
+        });
+    
+        passwordInput.addEventListener('input', function() {
+            const password = passwordInput.value;
+            const isValid = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])/.test(password);
+            passwordWarning.style.display = isValid ? 'none' : 'block';
         });
     </script>
 @endsection

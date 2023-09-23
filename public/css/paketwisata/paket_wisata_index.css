@@ -1,0 +1,87 @@
+/* Gaya untuk judul halaman */
+.card-header {
+    background-color: #007BFF; /* Warna latar belakang judul */
+    color: #fff; /* Warna teks judul */
+    font-size: 20px; /* Ukuran font judul */
+    font-weight: bold; /* Ketebalan font judul */
+    padding: 10px; /* Ruang padding judul */
+    border-radius: 5px; /* Sudut yang lebih lembut pada judul */
+}
+
+/* Gaya untuk tombol "Tambah" */
+.btn-success {
+    background-color: #28a745; /* Warna latar belakang tombol "Tambah" */
+    color: #fff; /* Warna teks tombol "Tambah" */
+    
+}
+
+/* Gaya untuk tombol "Filter" */
+.btn-primary {
+    background-color: #007BFF; /* Warna latar belakang tombol "Filter" */
+    color: #fff; /* Warna teks tombol "Filter" */
+    
+}
+
+.btn-info {
+    background-color: #007BFF; /* Warna latar belakang tombol "Filter" */
+    color: #fff; /* Warna teks tombol "Filter" */
+    
+}
+
+/* Gaya untuk tombol "Reset" */
+.btn-danger {
+    background-color: #dc3545; /* Warna latar belakang tombol "Reset" */
+    color: #fff; /* Warna teks tombol "Reset" */
+    
+}
+
+/* Gaya untuk tabel data */
+.table {
+    font-size: 14px; /* Ukuran font dalam tabel */
+}
+
+/* Gaya untuk baris ganjil dalam tabel */
+.table tr:nth-child(odd) {
+    background-color: #f8f9fa; /* Warna latar belakang baris ganjil */
+}
+
+/* Gaya untuk baris genap dalam tabel */
+.table tr:nth-child(even) {
+    background-color: #ffffff; /* Warna latar belakang baris genap */
+}
+
+.card {
+    background-color: #fff;
+    margin-bottom: 20px; /* Ruang bawah setiap kartu */
+    border: 1px solid #e2e2e2; /* Border kartu */
+    border-radius: 8px; /* Sudut yang lebih lembut pada kartu */
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Efek bayangan kartu */
+    transition: transform 0.3s ease-in-out; /* Efek transisi saat hover pada kartu */
+}
+
+/* Gaya untuk tautan gambar paket wisata */
+a.image-link {
+    display: block;
+    margin: 10px 0;
+}
+
+/* Gaya untuk gambar paket wisata */
+a.image-link img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Gaya untuk tautan PDF paket wisata */
+a.pdf-link {
+    display: block;
+    margin: 10px 0;
+    color: #007BFF; /* Warna teks tautan PDF */
+    text-decoration: underline; /* Garis bawah pada tautan PDF */
+}
+
+/* Gaya hover untuk tautan PDF paket wisata */
+a.pdf-link:hover {
+    color: #0056b3; /* Warna teks tautan PDF saat hover */
+    text-decoration: none; /* Hilangkan garis bawah saat hover */
+}

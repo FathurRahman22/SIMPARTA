@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/fasilitaswisata/fasilitas_wisata_index.css') }}">
     @can('fasilitasWisata_create')
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
@@ -11,7 +12,7 @@
     @endcan
     <div class="card">
         <div class="card-header">
-            {{ trans('cruds.fasilitasWisata.title_singular') }} {{ trans('global.list') }}
+        {{ trans('global.list') }} {{ trans('cruds.fasilitasWisata.title_singular') }}
         </div>
 
         <div class="card-body">
@@ -93,9 +94,7 @@
                                                 value="{{ trans('global.delete') }}">
                                         </form>
                                     @endcan
-
                                 </td>
-
                             </tr>
                         @endforeach
                     </tbody>

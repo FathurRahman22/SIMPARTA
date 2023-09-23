@@ -1,0 +1,187 @@
+/* Card Styles */
+.card {
+    background-color: #fff;
+    margin-bottom: 20px; /* Ruang bawah setiap kartu */
+    border: 1px solid #e2e2e2; /* Border kartu */
+    border-radius: 8px; /* Sudut yang lebih lembut pada kartu */
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Efek bayangan kartu */
+    transition: transform 0.3s ease-in-out; /* Efek transisi saat hover pada kartu */
+}
+
+.card-header {
+    background-color: #007BFF; /* Warna latar belakang judul */
+    color: #fff; /* Warna teks judul */
+    font-size: 20px; /* Ukuran font judul */
+    font-weight: bold; /* Ketebalan font judul */
+    padding: 10px; /* Ruang padding judul */
+    border-radius: 5px; /* Sudut yang lebih lembut pada judul */
+}
+
+/* Row Class */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+/* Chart Canvas Styles */
+#chartCanvas,
+#chartCanvas2 {
+    width: 100%; /* Make the canvas responsive to its container */
+    max-width: 500px; /* Set a maximum width if needed */
+    height: auto; /* Allow the height to adjust based on the width */
+    border: 1px solid #ddd; /* Add a border for clarity */
+    border-radius: 20px; /* Add rounded corners for aesthetics */
+    margin-top: 20px;
+    margin-right: 50px;
+    margin-left: 45px;
+    margin-bottom: 20px; /* Add spacing below the canvas */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Apply a subtle shadow */
+    background-color: #d8faff; /* Set the background color */
+}
+
+.card-header:hover {
+    background-color: #2790ff;
+}
+
+/* Chart Styles */
+.chart-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Adjust the gap between charts as needed */
+    margin-top: 20px;
+}
+
+/* Container for the first set of charts */
+.chart-container:nth-child(odd) {
+    background-color: #d8faff;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* Container for the second set of charts */
+.chart-container:nth-child(even) {
+    background-color: #d8faff;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+/* Chart Styles */
+.chart {
+    width: 250px;
+    height: 250px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Add hover effect to the charts */
+.chart:hover {
+    transform: scale(1.02);
+    transition: transform 0.2s ease-in-out;
+}
+
+
+/* Button Styles */
+.btn-default {
+    background-color: #ecfdfd;
+    color: #333;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.btn-default:hover {
+    background-color: lightgray;
+    color: #000;
+}
+
+/* Table Styles */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table th,
+.table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+/* Category Header Styles */
+.category-header {
+    cursor: pointer;
+    background-color: #f5f5f5;
+    font-weight: bold;
+    padding: 10px 20px;
+}
+
+.category-header:hover {
+    background-color: lightgray;
+}
+
+/* Category Content Styles */
+.category-content {
+    display: none;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-top: none;
+}
+
+/* Sub-table Styles */
+.category-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.category-content th,
+.category-content td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+/* Add alternating row colors to sub-tables */
+.category-content table tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+/* Style for the first cell in each sub-table header */
+.category-content th:first-child {
+    background-color: #f5f5f5;
+    font-weight: bold;
+    padding: 8px;
+}
+
+/* Add hover effect to sub-table rows */
+.category-content table tr:hover {
+    background-color: lightgray;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column; /* Stack columns on top of each other */
+    }
+
+    .chart-container {
+        flex-direction: column; /* Stack charts on top of each other */
+    }
+
+    .chart {
+        width: 100%;
+    }
+}

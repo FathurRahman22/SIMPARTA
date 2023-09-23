@@ -43,6 +43,12 @@ class User extends Authenticatable
         'deleted_at',
         'tag_id',
     ];
+    public function hasRole($role)
+{
+    return $this->roles->contains('title', $role);
+}
+
+
 
     public function tag()
     {

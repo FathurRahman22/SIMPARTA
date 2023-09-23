@@ -415,38 +415,6 @@
     </script>
 
     <script>
-        // Fungsi untuk on dan off button kirimm
-        function agreeCheckboxOnClick() {
-            var element = document.getElementById("buttonKirim");
-            if (element.disabled == true) {
-                element.disabled = false;
-            } else {
-                element.disabled = true;
-            }
-        }
-
-
-        function previewKtp(dataprofil) {
-            if (dataprofil.target.files.length > 0) {
-                var src = URL.createObjectURL(dataprofil.target.files[0]);
-                var preview = document.getElementById("KTP");
-                var input = document.getElementById("input-ktp");
-                preview.src = src;
-                preview.style.display = "block";
-                input.style.marginTop = "10px";
-            }
-        }
-
-        function previewFoto(dataprofil) {
-            if (dataprofil.target.files.length > 0) {
-                var src = URL.createObjectURL(dataprofil.target.files[0]);
-                var preview = document.getElementById("foto-si");
-                var input = document.getElementById("input-foto");
-                preview.src = src;
-                preview.style.display = "block";
-                input.style.marginTop = "10px";
-            }
-        }
 
         // set lokasi latitude dan longitude, lokasinya kota batu
         //    var mymap = L.map('mapid').setView([-7.870039, 112.524013], 15);

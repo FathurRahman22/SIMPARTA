@@ -1,0 +1,76 @@
+/* Gaya untuk judul halaman */
+.card-header {
+    background-color: #007BFF; /* Warna latar belakang judul */
+    color: #fff; /* Warna teks judul */
+    font-size: 20px; /* Ukuran font judul */
+    font-weight: bold; /* Ketebalan font judul */
+    padding: 10px; /* Ruang padding judul */
+    border-radius: 5px; /* Sudut yang lebih lembut pada judul */
+}
+
+/* Gaya untuk tombol "Tambah" */
+.btn-success {
+    background-color: #28a745; /* Warna latar belakang tombol "Tambah" */
+    color: #fff; /* Warna teks tombol "Tambah" */
+   
+}
+
+/* Gaya untuk tombol "Filter" */
+.btn-primary {
+    background-color: #007BFF; /* Warna latar belakang tombol "Filter" */
+    color: #fff; /* Warna teks tombol "Filter" */
+   
+}
+
+.btn-info {
+    background-color: #007BFF; /* Warna latar belakang tombol "Filter" */
+    color: #fff; /* Warna teks tombol "Filter" */
+    
+}
+
+/* Gaya untuk tombol "Reset" */
+.btn-danger {
+    background-color: #dc3545; /* Warna latar belakang tombol "Reset" */
+    color: #fff; /* Warna teks tombol "Reset" */
+   
+}
+
+/* Gaya untuk tabel data */
+.table {
+    font-size: 14px; /* Ukuran font dalam tabel */
+}
+
+/* Gaya untuk baris ganjil dalam tabel */
+.table tr:nth-child(odd) {
+    background-color: #f8f9fa; /* Warna latar belakang baris ganjil */
+}
+
+/* Gaya untuk baris genap dalam tabel */
+.table tr:nth-child(even) {
+    background-color: #ffffff; /* Warna latar belakang baris genap */
+}
+
+.card {
+    background-color: #fff;
+    margin-bottom: 20px; /* Ruang bawah setiap kartu */
+    border: 1px solid #e2e2e2; /* Border kartu */
+    border-radius: 8px; /* Sudut yang lebih lembut pada kartu */
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Efek bayangan kartu */
+    transition: transform 0.3s ease-in-out; /* Efek transisi saat hover pada kartu */
+}
+
+/* Gaya untuk status izin berizin */
+td[data-label="Status Izin"]::before {
+    content: attr(data-value);
+    display: block;
+    font-weight: bold;
+    color: green; /* Warna teks hijau untuk "Berizin" */
+}
+
+td[data-label="Status Izin"][data-value="Tidak Berizin"]::before {
+    content: attr(data-value);
+    display: block;
+    font-weight: bold;
+    color: red; /* Warna teks merah untuk "Tidak Berizin" */
+}

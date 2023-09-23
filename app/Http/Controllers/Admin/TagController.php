@@ -10,17 +10,32 @@ use App\Models\Tag;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-
+use Auth;   
 class TagController extends Controller
 {
     public function index()
-    {
+{
+    $user = Auth::user();
+    
+    // Cek apakah peran pengguna adalah 'Admin'
+    if ($user->hasRole('Admin')) {
+        $tags = Tag::all(); // Mengambil semua data tag
+    } else {
         abort_if(Gate::denies('tag_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $tags = Tag::all();
-
-        return view('admin.tags.index', compact('tags'));
+        
+        // Dapatkan tag terkait dengan pengguna jika bukan 'Admin'
+        $tag = $user->tag;
+        
+        // Pastikan tag tidak null sebelum mengambil data
+        if ($tag) {
+            $tags = Tag::where('id', $tag->id)->get();
+        } else {
+            $tags = []; // atau nilai default lainnya jika tag null
+        }
     }
+
+    return view('admin.tags.index', compact('tags'));
+}
 
     public function create()
     {

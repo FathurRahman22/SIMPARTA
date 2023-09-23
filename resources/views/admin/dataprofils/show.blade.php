@@ -39,12 +39,12 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>
-                                {{ trans('cruds.dataprofil.fields.name') }}
+                        <th>
+                                {{ trans('cruds.dataprofil.fields.tag') }}
                             </th>
                             <td>
-                                {{ $dataprofil->name }}
-                            </td>
+                                    {{ $dataprofil->tag->name ?? '' }}
+                                </td>
                         </tr>
                         <tr>
                             <th>

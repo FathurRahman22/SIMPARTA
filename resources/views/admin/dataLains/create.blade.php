@@ -427,18 +427,21 @@
                         @endif
                         <span class="help-block">{{ trans('cruds.dataLain.fields.tki_helper') }}</span>
                     </div>
-                    <div class="form-group">
-                        <label class="" for="statusizin">{{ trans('cruds.dataLain.fields.statusizin') }}</label>
-                        <input class="form-control {{ $errors->has('statusizin') ? 'is-invalid' : '' }}" type="text"
-                            name="statusizin" id="statusizin" value="{{ old('statusizin', '') }}" readonly>
-                        @if ($errors->has('statusizin'))
-                            <div class="invalid-feedback">
-                                {{ $errors->first('statusizin') }}
-                            </div>
-                        @endif
-                        <span class="help-block">{{ trans('cruds.dataLain.fields.statusizin_helper') }}</span>
-                    </div>
-
+                    @if (Auth::user()->roles[0]->title === 'Admin')
+                     <div class="form-group">
+                       <label class="" for="statusizin">{{ trans('cruds.dataLain.fields.statusizin') }}</label>
+                       <input class="form-control {{ $errors->has('statusizin') ? 'is-invalid' : '' }}" type="text"
+                         name="statusizin" id="statusizin" value="{{ old('statusizin', '') }}" readonly>
+                         @if ($errors->has('statusizin'))
+                      <div class="invalid-feedback">
+                         {{ $errors->first('statusizin') }}
+                   </div>
+                 @endif
+                 <span class="help-block">{{ trans('cruds.dataLain.fields.statusizin_helper') }}</span>
+               </div>
+                @else
+              <input type="hidden" name="statusizin" value="Operator">
+                @endif
                     <div class="form-group">
                         <button class="btn btn-danger" type="submit">
                             {{ trans('global.save') }}
@@ -447,7 +450,7 @@
                 </form>
             @else
                 <div class="alert alert-danger">
-                    Data Belum Ada
+                Inputkan Data Profil Terlebih Dahulu
                 </div>
             @endif
         </div>

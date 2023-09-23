@@ -23,12 +23,12 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>
-                                {{ trans('cruds.agenda.fields.dataprofil') }}
+                        <th>
+                                {{ trans('cruds.agenda.fields.tag') }}
                             </th>
                             <td>
-                                {{ $agenda->dataprofil->name ?? '' }}
-                            </td>
+                                    {{ $agenda->tag->name ?? '' }}
+                                </td>
                         </tr>
                         <tr>
                             <th>
@@ -56,6 +56,22 @@
                                         <img src="{{ $media->getUrl('thumb') }}">
                                     </a>
                                 @endforeach
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                {{ trans('cruds.agenda.fields.start_date') }}
+                            </th>
+                            <td>
+                                {{ $agenda->start_date }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                {{ trans('cruds.agenda.fields.end_date') }}
+                            </th>
+                            <td>
+                                {{ $agenda->end_date }}
                             </td>
                         </tr>
                     </tbody>

@@ -23,12 +23,12 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>
-                                {{ trans('cruds.fasilitasWisata.fields.dataprofil') }}
+                        <th>
+                                {{ trans('cruds.fasilitasWisata.fields.tag') }}
                             </th>
                             <td>
-                                {{ $fasilitasWisata->dataprofil->name ?? '' }}
-                            </td>
+                                    {{ $fasilitasWisata->tag->name ?? '' }}
+                                </td>
                         </tr>
                         <tr>
                             <th>

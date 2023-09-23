@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/datakunjungan/data_kunjungan_index.css') }}">
     @can('data_kunjungan_create')
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
@@ -11,7 +12,7 @@
     @endcan
     <div class="card">
         <div class="card-header">
-            {{ trans('cruds.dataKunjungan.title_singular') }} {{ trans('global.list') }}
+            {{ trans('global.list') }} {{ trans('cruds.dataKunjungan.title_singular') }}
         </div>
         <div class="card-body">
             <form action="{{ route('admin.data-kunjungans.filter') }}" method="POST" id="filter_form">
@@ -133,6 +134,43 @@
                             </tr>
                         @endforeach
                     </tbody>
+                    <section>
+                        @if (Auth::user()->roles[0]->title === 'Admin')
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <h3>Total Mancanegara dan Nusantara Hotel dan Akomodasi Lainnya:</h3>
+                                        <p>Mancanegara: {{ $categoryTotalsDKW['hotelMancanegaraTotal'] }}</p>
+                                        <p>Nusantara: {{ $categoryTotalsDKW['hotelNusantaraTotal'] }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <h3>Total Mancanegara dan Nusantara Daya Tarik Wisata:</h3>
+                                        <p>Mancanegara: {{ $categoryTotalsDKW['dtwMancanegaraTotal'] }}</p>
+                                        <p>Nusantara: {{ $categoryTotalsDKW['dtwNusantaraTotal'] }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+                        @if (Auth::user()->roles[0]->title === 'Admin')
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <h3>Grafik Total Mancanegara dan Nusantara Hotel dan Akomodasi Lainnya:</h3>
+                                        <canvas id="hotelChart"></canvas>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <h3>Grafik Total Mancanegara dan Nusantara Daya Tarik Wisata:</h3>
+                                        <canvas id="dtwChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    </section><br>
                 </table>
             </div>
         </div>
@@ -140,6 +178,45 @@
 @endsection
 @section('scripts')
     @parent
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script>
+        // Data untuk grafik pie chart Hotel dan Akomodasi Lainnya
+        var hotelData = {
+            labels: ["Mancanegara", "Nusantara"],
+            datasets: [{
+                data: [{{ $categoryTotalsDKW['hotelMancanegaraTotal'] }},
+                    {{ $categoryTotalsDKW['hotelNusantaraTotal'] }}
+                ],
+                backgroundColor: ["#ff5733", "#33ff57"]
+            }]
+        };
+
+        // Data untuk grafik pie chart Daya Tarik Wisata
+        var dtwData = {
+            labels: ["Mancanegara", "Nusantara"],
+            datasets: [{
+                data: [{{ $categoryTotalsDKW['dtwMancanegaraTotal'] }},
+                    {{ $categoryTotalsDKW['dtwNusantaraTotal'] }}
+                ],
+                backgroundColor: ["#3366ff", "#ff33ff"]
+            }]
+        };
+
+        // Inisialisasi grafik pie chart Hotel dan Akomodasi Lainnya
+        var hotelChartCanvas = document.getElementById('hotelChart').getContext('2d');
+        var hotelChart = new Chart(hotelChartCanvas, {
+            type: 'pie',
+            data: hotelData
+        });
+
+        // Inisialisasi grafik pie chart Daya Tarik Wisata
+        var dtwChartCanvas = document.getElementById('dtwChart').getContext('2d');
+        var dtwChart = new Chart(dtwChartCanvas, {
+            type: 'pie',
+            data: dtwData
+        });
+    </script>
+
     <script>
         $(function() {
             let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)

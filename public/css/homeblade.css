@@ -1,0 +1,301 @@
+ /* Gaya umum */
+ body {
+    font-family: Verdana, sans-serif;
+    background-color: #f7f7f7;
+    /* Warna latar belakang halaman */
+    padding: 20px;
+}
+
+/* Gaya untuk header kartu */
+.card-header {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    background-color: #1067aa;
+    /* Warna latar belakang header */
+    color: #fff;
+    /* Warna teks header */
+}
+
+/* Gaya untuk map */
+#mapid {
+    height: 90em;
+    /* Sesuaikan dengan ukuran yang Anda inginkan, dalam contoh ini tingginya setara dengan 105% dari tinggi viewport (vh) */
+}
+
+/* Gaya untuk tabel */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Bayangan tabel */
+    background-color: #fff;
+    /* Warna latar belakang tabel */
+}
+
+.table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Gaya untuk gambar dalam kolom */
+.table td img {
+    max-width: 50px;
+    height: auto;
+    display: block;
+    /* Membuat gambar berada di tengah kolom */
+    margin: 0 auto;
+    /* Pusatkan gambar horizontal */
+}
+
+/* Gaya animasi saat gambar diklik */
+.table td img:hover {
+    transform: scale(1.1);
+    /* Mengubah ukuran gambar saat diklik */
+    transition: transform 0.3s ease;
+    /* Efek transisi untuk animasi */
+}
+
+/* Gaya untuk teks dalam kolom */
+.table td p {
+    font-weight: bold;
+    color: #333;
+    /* Warna teks dalam kolom */
+    font-size: 16px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Color table dtw */
+.highlight-column {
+    background-color: rgba(183, 23, 23, 0.399);
+}
+
+.akomodasi {
+    background-color: rgba(11, 74, 141, 0.156);
+}
+
+.restoran {
+    background-color: rgba(240, 149, 37, 0.584);
+}
+
+.kafe {
+    background-color: rgba(148, 18, 18, 0.175);
+}
+
+.makanan {
+    background-color: rgba(8, 2, 196, 0.175);
+}
+
+.minuman {
+    background-color: rgba(18, 124, 148, 0.175);
+}
+
+.bar {
+    background-color: rgba(239, 135, 135, 0.175);
+}
+
+.spa {
+    background-color: rgba(255, 161, 67, 0.384);
+}
+
+.pariwisata {
+    background-color: rgba(249, 241, 17, 0.493);
+}
+
+.perkemahan {
+    background-color: rgba(6, 81, 14, 0.175);
+}
+
+.taman {
+    background-color: rgba(60, 56, 56, 0.175);
+}
+
+.desain {
+    background-color: rgba(126, 66, 255, 0.175);
+}
+
+.seni {
+    background-color: rgba(0, 15, 184, 0.175);
+}
+
+.olahraga {
+    background-color: rgba(90, 193, 11, 0.175);
+}
+
+/* Responsif pada tablet */
+@media (max-width: 768px) {
+    @media (max-width: 768px) {
+        .card-item {
+            flex: 0 0 calc(50% - 20px);
+        }
+    }
+
+    .card-header {
+        font-size: 20px;
+    }
+
+    .table td {
+        padding: 10px;
+    }
+
+    .table td img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .table td p {
+        font-size: 14px;
+        margin-top: 5px;
+    }
+}
+
+/* Responsif pada ponsel */
+@media (max-width: 480px) {
+    .card-header {
+        font-size: 18px;
+    }
+
+    .table td {
+        padding: 10px;
+    }
+
+    .table td img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .table td p {
+        font-size: 12px;
+        margin-top: 5px;
+    }
+}
+
+.statis {
+    overflow-x: hidden;
+}
+
+.slider-container {
+    overflow-x: hidden;
+    white-space: nowrap;
+}
+
+.slider {
+    display: flex;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    animation: scrollRight 20s linear infinite;
+    /* Atur animasi */
+}
+
+/* Gaya untuk kartu dengan indeks ganjil */
+.card-item:nth-child(odd) {
+    background: #fc9d9d; /* Warna latar belakang merah muda */
+    color: #000; /* Warna teks hitam */
+}
+
+/* Gaya untuk kartu dengan indeks genap */
+.card-item:nth-child(even) {
+    background: #4db1d2; /* Warna latar belakang biru */
+    color: #fff; /* Warna teks putih */
+}
+
+.card-item {
+    flex: 0 0 calc(20% - 20px);
+    margin-right: 20px;
+    scroll-snap-align: start;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    color: white;
+}
+
+.card-item:last-child {
+    margin-right: 0;
+}
+
+h3,
+p {
+    color: white;
+}
+
+/* Keyframes untuk scrolling ke kanan */
+@keyframes scrollRight {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-230%);
+        /* Geser ke kiri sejauh 100% */
+    }
+}
+
+/* Add this to your CSS */
+.stop-animation {
+    animation-play-state: paused !important;
+
+}
+
+/* Gaya untuk section */
+section {
+    padding: 20px;
+    background-color: #ecfdfd; /* Warna latar belakang */
+}
+
+/* Gaya untuk card */
+.card {
+    background-color: #fff;
+    border: 1px solid #e2e2e2;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Gaya untuk judul (h3) dalam card */
+.card h3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #1067aa; /* Warna biru */
+    margin-bottom: 10px;
+}
+
+/* Gaya untuk paragraf (p) dalam card */
+.card p {
+    font-size: 16px;
+    color: #333; /* Warna teks default */
+    margin-bottom: 10px;
+}
+
+/* Gaya untuk grafik container */
+.canvas-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa; /* Warna latar belakang untuk container */
+    padding: 20px; /* Ruang padding di sekitar container */
+}
+
+/* Gaya untuk canvas grafik */
+canvas {
+    max-width: 100%;
+    height: auto;
+    border: 2px solid #ecfdfd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Gaya hover untuk canvas grafik */
+canvas:hover {
+    transform: scale(1.05);
+    border-color: #ecfdfd; /* Ubah warna border saat hover */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Efek bayangan lebih besar saat hover */
+}
+

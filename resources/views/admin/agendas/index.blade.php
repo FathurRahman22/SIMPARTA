@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/agenda/agenda_index.css') }}">
     @can('agenda_create')
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
@@ -11,7 +12,7 @@
     @endcan
     <div class="card">
         <div class="card-header">
-            {{ trans('cruds.agenda.title_singular') }} {{ trans('global.list') }}
+        {{ trans('global.list') }} {{ trans('cruds.agenda.title_singular') }}
         </div>
 
         <div class="card-body">

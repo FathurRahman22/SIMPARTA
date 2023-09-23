@@ -26,12 +26,12 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>
-                                {{ trans('cruds.dataLain.fields.dataprofil') }}
+                        <th>
+                                {{ trans('cruds.dataLain.fields.tag') }}
                             </th>
                             <td>
-                                {{ $dataLain->dataprofil->name ?? '' }}
-                            </td>
+                                    {{ $dataLain->tag->name ?? '' }}
+                                </td>
                         </tr>
                         <tr>
                             <th>

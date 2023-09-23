@@ -25,6 +25,7 @@ class DataLainController extends Controller
 
         $user = Auth::user();
         $filters = [];
+
         if (!is_null($user->roles[0]->title) && $user->roles[0]->title !== 'Admin') {
             $filters = [
                 ['tag_id', '=', $user->tag_id]
@@ -36,6 +37,8 @@ class DataLainController extends Controller
 
         return view('admin.dataLains.index', compact('dataLains', 'tags'));
     }
+
+
 
     public function create()
     {

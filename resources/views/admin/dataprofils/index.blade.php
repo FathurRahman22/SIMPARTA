@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/dataprofil/data_profil_index.css') }}">
     @can('dataprofil_create')
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
@@ -11,7 +12,7 @@
     @endcan
     <div class="card">
         <div class="card-header">
-            {{ trans('cruds.dataprofil.title_singular') }} {{ trans('global.list') }}
+        {{ trans('global.list') }} {{ trans('cruds.dataprofil.title_singular') }}
         </div>
 
         <div class="card-body">
@@ -44,8 +45,8 @@
                                 {{ trans('cruds.dataprofil.fields.kelurahan') }}
                             </th>
                             <!-- <th>
-                                {{ trans('cruds.dataprofil.fields.description') }}
-                            </th> -->
+                                    {{ trans('cruds.dataprofil.fields.description') }}
+                                </th> -->
                             <th>
                                 {{ trans('cruds.dataprofil.fields.start_time') }}
                             </th>
@@ -54,7 +55,7 @@
                             </th>
                             <th> Map
                                 <!-- {{ trans('cruds.dataprofil.fields.latitude') }}
-                                {{ trans('cruds.dataprofil.fields.longitude') }} -->
+                                    {{ trans('cruds.dataprofil.fields.longitude') }} -->
                             </th>
                             <th>
                                 {{ trans('cruds.dataprofil.fields.dataprofil_photo') }}
@@ -92,8 +93,8 @@
                                     {{ $dataprofil->kelurahan ?? '' }}
                                 </td>
                                 <!-- <td>
-                                    {{ $dataprofil->description ?? '' }}
-                                </td> -->
+                                        {{ $dataprofil->description ?? '' }}
+                                    </td> -->
                                 <td>
                                     {{ $dataprofil->start_time ?? '' }}
                                 </td>
@@ -104,7 +105,7 @@
                                     <a
                                         href="https://www.google.com/maps/search/?api=1&query={{ $dataprofil->latitude }},{{ $dataprofil->longitude }}">BUKA</a>
                                     <!-- {{ $dataprofil->latitude ?? '' }}
-                                    {{ $dataprofil->longitude ?? '' }} -->
+                                        {{ $dataprofil->longitude ?? '' }} -->
                                 </td>
                                 <td>
                                     @foreach ($dataprofil->dataprofil_photo as $key => $media)

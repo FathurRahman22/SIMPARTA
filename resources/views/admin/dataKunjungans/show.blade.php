@@ -1,11 +1,15 @@
 @extends('layouts.admin')
 @section('content')
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/datakunjungan/data_kunjungan_show.css') }}">
     <div class="card">
         <div class="card-header">
             {{ trans('global.show') }} {{ trans('cruds.dataKunjungan.title') }}
         </div>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <canvas id="chartCanvas" width="400" height="200"></canvas>
+        <div class="row">
+            <canvas id="chartCanvas" class="canvas-left"></canvas>
+            <canvas id="chartCanvas2" class="canvas-right"></canvas>
+        </div>
         <div class="chart-container">
             <div class="chart">
                 <canvas id="aseanPieChart"></canvas>
@@ -29,722 +33,7 @@
                 <canvas id="afrikaPieChart"></canvas>
             </div>
         </div>
-        <style>
-            .chart-container {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 20px;
-                /* Adjust the gap between charts as needed */
-            }
-
-            .chart {
-                width: 250px;
-                height: 250px;
-            }
-        </style>
-        <canvas id="chartCanvas2" width="400" height="200"></canvas>
-        <div class="chart-container">
-            <div class="chart">
-                <canvas id="jawaPieChart"></canvas>
-            </div>
-            <div class="chart">
-                <canvas id="kalimantanPieChart"></canvas>
-            </div>
-            <div class="chart">
-                <canvas id="sumateraPieChart"></canvas>
-            </div>
-            <div class="chart">
-                <canvas id="sulawesiPieChart"></canvas>
-            </div>
-            <div class="chart">
-                <canvas id="baliNusraPieChart"></canvas>
-            </div>
-            <div class="chart">
-                <canvas id="papuaPieChart"></canvas>
-            </div>
-        </div>
-        <style>
-            .chart-container {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 20px;
-                /* Adjust the gap between charts as needed */
-            }
-
-            .chart {
-                width: 250px;
-                height: 250px;
-            }
-        </style>
-
-
-
-
-
-
-        <script>
-            // Get the canvas element and its context
-            var ctx = document.getElementById('chartCanvas').getContext('2d');
-
-            // Prepare your data (replace this with your actual data)
-            var regions = ['ASEAN', 'Asia', 'Timur Tengah', 'Eropa', 'Amerika', 'Oseania', 'Afrika', ];
-            var regionTotals = [{{ $dataKunjungan->asean }}, {{ $dataKunjungan->asia }}, {{ $dataKunjungan->timur_tengah }},
-                {{ $dataKunjungan->eropa }}, {{ $dataKunjungan->amerika }}, {{ $dataKunjungan->oseania }},
-                {{ $dataKunjungan->afrika }},
-            ];
-
-            // Create the chart
-            var chart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: regions,
-                    datasets: [{
-                        label: 'Mancanegara',
-                        data: regionTotals,
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-            var chart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: regions2,
-                    datasets: [{
-                        label: 'Region Totals',
-                        data: region2Totals,
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        </script>
-        <script>
-            var ctx = document.getElementById('aseanPieChart').getContext('2d');
-
-            var regions = ['Malaysia', 'Filipina', 'Singapura', 'Thailand', 'Vietnam', 'ASEAN Lainnya'];
-            var populations = [
-                {{ $dataKunjungan->malaysia }},
-                {{ $dataKunjungan->filipina }},
-                {{ $dataKunjungan->singapura }},
-                {{ $dataKunjungan->thailand }},
-                {{ $dataKunjungan->vietnam }},
-                {{ $dataKunjungan->aseanlainnya }}
-            ];
-
-            var totalPopulation = populations.reduce((a, b) => a + b, 0);
-            var percentages = populations.map(population => ((population / totalPopulation) * 100).toFixed(2));
-
-            var backgroundColors = [
-                'rgba(255, 99, 132, 0.5)',
-                'rgba(54, 162, 235, 0.5)',
-                'rgba(255, 206, 86, 0.5)',
-                'rgba(75, 192, 192, 0.5)',
-                'rgba(153, 102, 255, 0.5)',
-                'rgba(255, 159, 64, 0.5)'
-            ];
-
-            var aseanPieChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: regions,
-                    datasets: [{
-                        data: percentages,
-                        backgroundColor: backgroundColors
-                    }]
-                },
-                options: {
-                    title: {
-                        display: true,
-                        text: 'Persentase Populasi Wilayah di ASEAN'
-                    }
-                }
-            });
-        </script>
-        <script>
-            var ctx = document.getElementById('asiaPieChart').getContext('2d');
-
-            var regions = ['Hong Kong', 'India', 'Japan', 'Korea Selatan', 'Taiwan', 'Tiongkok', 'Timor Leste', 'Asia Lainnya'];
-            var populations = [
-                {{ $dataKunjungan->hongkong }},
-                {{ $dataKunjungan->india }},
-                {{ $dataKunjungan->jepang }},
-                {{ $dataKunjungan->korea_selatan }},
-                {{ $dataKunjungan->taiwan }},
-                {{ $dataKunjungan->tiongkok }},
-                {{ $dataKunjungan->timor_leste }},
-                {{ $dataKunjungan->asia_lainnya }}
-            ];
-
-            var totalPopulation = populations.reduce((a, b) => a + b, 0);
-            var percentages = populations.map(population => ((population / totalPopulation) * 100).toFixed(2));
-
-            var backgroundColors = [
-                'rgba(255, 99, 132, 0.5)',
-                'rgba(54, 162, 235, 0.5)',
-                'rgba(255, 206, 86, 0.5)',
-                'rgba(75, 192, 192, 0.5)',
-                'rgba(153, 102, 255, 0.5)',
-                'rgba(255, 159, 64, 0.5)',
-                'rgba(255, 0, 0, 0.5)',
-                'rgba(0, 255, 0, 0.5)'
-            ];
-
-            var asiaPieChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: regions,
-                    datasets: [{
-                        data: percentages,
-                        backgroundColor: backgroundColors
-                    }]
-                },
-                options: {
-                    title: {
-                        display: true,
-                        text: 'Persentase Populasi Wilayah di Asia'
-                    }
-                }
-            });
-        </script>
-        <script>
-            var ctx = document.getElementById('timurTengahPieChart').getContext('2d');
-
-            var regions = ['Arab Saudi', 'Kuwait', 'Mesir', 'UAE', 'Yaman', 'Timur Tengah Lain'];
-            var populations = [
-                {{ $dataKunjungan->arab_saudi }},
-                {{ $dataKunjungan->kuwait }},
-                {{ $dataKunjungan->mesir }},
-                {{ $dataKunjungan->uae }},
-                {{ $dataKunjungan->yaman }},
-                {{ $dataKunjungan->timur_tengah_lain }}
-            ];
-
-            var totalPopulation = populations.reduce((a, b) => a + b, 0);
-            var percentages = populations.map(population => ((population / totalPopulation) * 100).toFixed(2));
-
-            var backgroundColors = [
-                'rgba(255, 99, 132, 0.5)',
-                'rgba(54, 162, 235, 0.5)',
-                'rgba(255, 206, 86, 0.5)',
-                'rgba(75, 192, 192, 0.5)',
-                'rgba(153, 102, 255, 0.5)',
-                'rgba(255, 159, 64, 0.5)'
-            ];
-
-            var timurTengahPieChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: regions,
-                    datasets: [{
-                        data: percentages,
-                        backgroundColor: backgroundColors
-                    }]
-                },
-                options: {
-                    title: {
-                        display: true,
-                        text: 'Persentase Populasi Wilayah di Timur Tengah'
-                    }
-                }
-            });
-        </script>
-
-        <script>
-            var ctx = document.getElementById('eropaPieChart').getContext('2d');
-
-            var regions = ['Perancis', 'Jerman', 'Belanda', 'Inggris', 'Rusia', 'Eropa Lainnya'];
-            var populations = [
-                {{ $dataKunjungan->perancis }},
-                {{ $dataKunjungan->jerman }},
-                {{ $dataKunjungan->belanda }},
-                {{ $dataKunjungan->inggris }},
-                {{ $dataKunjungan->rusia }},
-                {{ $dataKunjungan->eropa_lainnya }}
-            ];
-
-            var totalPopulation = populations.reduce((a, b) => a + b, 0);
-            var percentages = populations.map(population => ((population / totalPopulation) * 100).toFixed(2));
-
-            var backgroundColors = [
-                'rgba(255, 99, 132, 0.5)',
-                'rgba(54, 162, 235, 0.5)',
-                'rgba(255, 206, 86, 0.5)',
-                'rgba(75, 192, 192, 0.5)',
-                'rgba(153, 102, 255, 0.5)',
-                'rgba(255, 159, 64, 0.5)'
-            ];
-
-            var eropaPieChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: regions,
-                    datasets: [{
-                        data: percentages,
-                        backgroundColor: backgroundColors
-                    }]
-                },
-                options: {
-                    title: {
-                        display: true,
-                        text: 'Persentase Populasi Wilayah di Eropa'
-                    }
-                }
-            });
-        </script>
-        <script>
-            var ctx = document.getElementById('amerikaPieChart').getContext('2d');
-
-            var regions = ['Amerika Serikat', 'Kanada', 'Brazil', 'Meksiko', 'Amerika Lainnya'];
-            var populations = [
-                {{ $dataKunjungan->amerika_serikat }},
-                {{ $dataKunjungan->kanada }},
-                {{ $dataKunjungan->brazil }},
-                {{ $dataKunjungan->meksiko }},
-                {{ $dataKunjungan->amerika_lainnya }}
-            ];
-
-            var totalPopulation = populations.reduce((a, b) => a + b, 0);
-            var percentages = populations.map(population => ((population / totalPopulation) * 100).toFixed(2));
-
-            var backgroundColors = [
-                'rgba(255, 99, 132, 0.5)',
-                'rgba(54, 162, 235, 0.5)',
-                'rgba(255, 206, 86, 0.5)',
-                'rgba(75, 192, 192, 0.5)',
-                'rgba(153, 102, 255, 0.5)'
-            ];
-
-            var amerikaPieChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: regions,
-                    datasets: [{
-                        data: percentages,
-                        backgroundColor: backgroundColors
-                    }]
-                },
-                options: {
-                    title: {
-                        display: true,
-                        text: 'Persentase Populasi Wilayah di Amerika'
-                    }
-                }
-            });
-        </script>
-        <script>
-            var ctx = document.getElementById('oseaniaPieChart').getContext('2d');
-
-            var regions = ['Australia', 'Selandia Baru', 'Papua Nugini', 'Oseania Lainnya'];
-            var populations = [
-                {{ $dataKunjungan->australia }},
-                {{ $dataKunjungan->selandia_baru }},
-                {{ $dataKunjungan->papua_nugini }},
-                {{ $dataKunjungan->oseania_lainnya }}
-            ];
-
-            var totalPopulation = populations.reduce((a, b) => a + b, 0);
-            var percentages = populations.map(population => ((population / totalPopulation) * 100).toFixed(2));
-
-            var backgroundColors = [
-                'rgba(255, 99, 132, 0.5)',
-                'rgba(54, 162, 235, 0.5)',
-                'rgba(255, 206, 86, 0.5)',
-                'rgba(75, 192, 192, 0.5)'
-            ];
-
-            var oseaniaPieChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: regions,
-                    datasets: [{
-                        data: percentages,
-                        backgroundColor: backgroundColors
-                    }]
-                },
-                options: {
-                    title: {
-                        display: true,
-                        text: 'Persentase Populasi Wilayah di Oseania'
-                    }
-                }
-            });
-        </script>
-        <script>
-            var ctx = document.getElementById('afrikaPieChart').getContext('2d');
-
-            var regions = ['Afrika Selatan', 'Afrika Lainnya'];
-            var populations = [
-                {{ $dataKunjungan->afrika_selatan }},
-                {{ $dataKunjungan->afrika_lainnya }}
-            ];
-
-            var totalPopulation = populations.reduce((a, b) => a + b, 0);
-            var percentages = populations.map(population => ((population / totalPopulation) * 100).toFixed(2));
-
-            var backgroundColors = [
-                'rgba(255, 99, 132, 0.5)',
-                'rgba(54, 162, 235, 0.5)'
-            ];
-
-            var afrikaPieChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: regions,
-                    datasets: [{
-                        data: percentages,
-                        backgroundColor: backgroundColors
-                    }]
-                },
-                options: {
-                    title: {
-                        display: true,
-                        text: 'Persentase Populasi Wilayah di Afrika'
-                    }
-                }
-            });
-        </script>
-
-        <script>
-            // Get the canvas element and its context
-            var ctx = document.getElementById('chartCanvas2').getContext('2d');
-
-            var regions2 = ['Jawa', 'Kalimantan', 'Sumatera', 'Sulawesi', 'Balinustra', 'Papua'];
-            var region2Totals = [{{ $dataKunjungan->jawa }}, {{ $dataKunjungan->kalimantan }},
-                {{ $dataKunjungan->sumatera }}, {{ $dataKunjungan->sulawesi }}, {{ $dataKunjungan->bali_nustra }},
-                {{ $dataKunjungan->papuaa }}
-            ];
-
-            // Create the chart
-            var chart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: regions2,
-                    datasets: [{
-                        label: 'Nusantara',
-                        data: region2Totals,
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-            var chart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: regions2,
-                    datasets: [{
-                        label: 'Region Totals',
-                        data: region2Totals,
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        </script>
-        <script>
-            var ctx = document.getElementById('jawaPieChart').getContext('2d');
-
-            var regions = ['Jawa Timur', 'Jawa Barat', 'Jawa Tengah', 'DIY', 'DKI Jakarta', 'Banten'];
-            var populations = [
-                {{ $dataKunjungan->jawa_timur }},
-                {{ $dataKunjungan->jawa_barat }},
-                {{ $dataKunjungan->jawa_tengah }},
-                {{ $dataKunjungan->diy }},
-                {{ $dataKunjungan->dki }},
-                {{ $dataKunjungan->banten }}
-            ];
-
-            var totalPopulation = populations.reduce((a, b) => a + b, 0);
-            var percentages = populations.map(population => ((population / totalPopulation) * 100).toFixed(2));
-
-            var backgroundColors = [
-                'rgba(255, 99, 132, 0.5)',
-                'rgba(54, 162, 235, 0.5)',
-                'rgba(255, 206, 86, 0.5)',
-                'rgba(75, 192, 192, 0.5)',
-                'rgba(153, 102, 255, 0.5)',
-                'rgba(255, 159, 64, 0.5)' // Add more colors as needed
-            ];
-
-            var jawaPieChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: regions,
-                    datasets: [{
-                        data: percentages,
-                        backgroundColor: backgroundColors
-                    }]
-                },
-                options: {
-                    title: {
-                        display: true,
-                        text: 'Persentase Populasi Wilayah di Jawa'
-                    }
-                }
-            });
-        </script>
-
-        <script>
-            var ctx = document.getElementById('kalimantanPieChart').getContext('2d');
-
-            var regions = ['Kaltara', 'Kaltim', 'Kalteng', 'Kalbar', 'Kalsel'];
-            var populations = [
-                {{ $dataKunjungan->kaltara }},
-                {{ $dataKunjungan->kaltim }},
-                {{ $dataKunjungan->kalteng }},
-                {{ $dataKunjungan->kalbar }},
-                {{ $dataKunjungan->kalsel }}
-            ];
-
-
-            var totalPopulation = populations.reduce((a, b) => a + b, 0);
-            var percentages = populations.map(population => ((population / totalPopulation) * 100).toFixed(2));
-
-            var backgroundColors = [
-                'rgba(255, 99, 132, 0.5)',
-                'rgba(54, 162, 235, 0.5)',
-                'rgba(255, 206, 86, 0.5)',
-                'rgba(75, 192, 192, 0.5)',
-                'rgba(153, 102, 255, 0.5)'
-            ];
-
-            var kalimantanPieChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: regions,
-                    datasets: [{
-                        data: percentages,
-                        backgroundColor: backgroundColors
-                    }]
-                },
-                options: {
-                    title: {
-                        display: true,
-                        text: 'Persentase Populasi Wilayah di Kalimantan'
-                    }
-
-                }
-
-            });
-        </script>
-        <script>
-            var ctx = document.getElementById('sumateraPieChart').getContext('2d');
-
-            var regions = ['Aceh', 'Sumatera Utara', 'Riau', 'Kepulauan Riau', 'Jambi', 'Sumatera Barat', 'Sumatera Selatan',
-                'Kepulauan Bangka Belitung', 'Bengkulu', 'Lampung'
-            ];
-            var populations = [
-                {{ $dataKunjungan->aceh }},
-                {{ $dataKunjungan->sumut }},
-                {{ $dataKunjungan->riau }},
-                {{ $dataKunjungan->kep_riau }},
-                {{ $dataKunjungan->jambi }},
-                {{ $dataKunjungan->sumbar }},
-                {{ $dataKunjungan->sumsel }},
-                {{ $dataKunjungan->bangka }},
-                {{ $dataKunjungan->bengkulu }},
-                {{ $dataKunjungan->lampung }}
-            ];
-
-            var totalPopulation = populations.reduce((a, b) => a + b, 0);
-            var percentages = populations.map(population => ((population / totalPopulation) * 100).toFixed(2));
-
-            var backgroundColors = [
-                'rgba(255, 99, 132, 0.5)',
-                'rgba(54, 162, 235, 0.5)',
-                'rgba(255, 206, 86, 0.5)',
-                'rgba(75, 192, 192, 0.5)',
-                'rgba(153, 102, 255, 0.5)',
-                'rgba(255, 159, 64, 0.5)',
-                'rgba(255, 0, 0, 0.5)',
-                'rgba(0, 255, 0, 0.5)',
-                'rgba(0, 0, 255, 0.5)',
-                'rgba(128, 128, 128, 0.5)' // Add more colors as needed
-            ];
-
-            var sumateraPieChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: regions,
-                    datasets: [{
-                        data: percentages,
-                        backgroundColor: backgroundColors
-                    }]
-                },
-                options: {
-                    title: {
-                        display: true,
-                        text: 'Persentase Populasi Wilayah di Sumatera'
-                    }
-                }
-            });
-        </script>
-        <script>
-            var ctx = document.getElementById('sulawesiPieChart').getContext('2d');
-
-            var regions = ['Sulawesi Utara', 'Sulawesi Barat', 'Sulawesi Tengah', 'Sulawesi Selatan', 'Sulawesi Tenggara',
-                'Gorontalo'
-            ];
-            var populations = [
-                {{ $dataKunjungan->sulut }},
-                {{ $dataKunjungan->sulbar }},
-                {{ $dataKunjungan->sulteng }},
-                {{ $dataKunjungan->sulsel }},
-                {{ $dataKunjungan->sulgara }},
-                {{ $dataKunjungan->gorontalo }}
-            ];
-
-            var totalPopulation = populations.reduce((a, b) => a + b, 0);
-            var percentages = populations.map(population => ((population / totalPopulation) * 100).toFixed(2));
-
-            var backgroundColors = [
-                'rgba(255, 99, 132, 0.5)',
-                'rgba(54, 162, 235, 0.5)',
-                'rgba(255, 206, 86, 0.5)',
-                'rgba(75, 192, 192, 0.5)',
-                'rgba(153, 102, 255, 0.5)',
-                'rgba(255, 159, 64, 0.5)' // Add more colors as needed
-            ];
-
-            var sulawesiPieChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: regions,
-                    datasets: [{
-                        data: percentages,
-                        backgroundColor: backgroundColors
-                    }]
-                },
-                options: {
-                    title: {
-                        display: true,
-                        text: 'Persentase Populasi Wilayah di Sulawesi'
-                    }
-                }
-            });
-        </script>
-        <script>
-            var ctx = document.getElementById('baliNusraPieChart').getContext('2d');
-
-            var regions = ['Bali', 'Nusa Tenggara Barat (NTB)', 'Nusa Tenggara Timur (NTT)'];
-            var populations = [
-                {{ $dataKunjungan->bali }},
-                {{ $dataKunjungan->ntb }},
-                {{ $dataKunjungan->ntt }}
-            ];
-
-            var totalPopulation = populations.reduce((a, b) => a + b, 0);
-            var percentages = populations.map(population => ((population / totalPopulation) * 100).toFixed(2));
-
-            var baliNusraPieChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: regions,
-                    datasets: [{
-                        data: percentages,
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.5)',
-                            'rgba(54, 162, 235, 0.5)',
-                            'rgba(255, 206, 86, 0.5)'
-                        ]
-                    }]
-                },
-                options: {
-                    title: {
-                        display: true,
-                        text: 'Persentase Populasi Wilayah di Bali & Nusa Tenggara'
-                    }
-                }
-            });
-        </script>
-
-        <script>
-            var ctx = document.getElementById('papuaPieChart').getContext('2d');
-
-            var regions = ['Maluku', 'Maluku Utara', 'Papua', 'Papua Barat', 'Papua Barat Daya', 'Papua Selatan',
-                'Papua Tengah', 'Papua Pegunungan'
-            ];
-            var populations = [
-                {{ $dataKunjungan->maluku }},
-                {{ $dataKunjungan->maluku_utara }},
-                {{ $dataKunjungan->papua }},
-                {{ $dataKunjungan->papua_barat }},
-                {{ $dataKunjungan->papua_baratdaya }},
-                {{ $dataKunjungan->papua_selatan }},
-                {{ $dataKunjungan->papua_tengah }},
-                {{ $dataKunjungan->papua_pegunungan }}
-            ];
-
-            var totalPopulation = populations.reduce((a, b) => a + b, 0);
-            var percentages = populations.map(population => ((population / totalPopulation) * 100).toFixed(2));
-
-            var backgroundColors = [
-                'rgba(255, 99, 132, 0.5)',
-                'rgba(54, 162, 235, 0.5)',
-                'rgba(255, 206, 86, 0.5)',
-                'rgba(75, 192, 192, 0.5)',
-                'rgba(153, 102, 255, 0.5)',
-                'rgba(255, 159, 64, 0.5)',
-                'rgba(255, 0, 0, 0.5)',
-                'rgba(0, 255, 0, 0.5)'
-            ];
-
-            var papuaPieChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: regions,
-                    datasets: [{
-                        data: percentages,
-                        backgroundColor: backgroundColors
-                    }]
-                },
-                options: {
-                    title: {
-                        display: true,
-                        text: 'Persentase Populasi Wilayah di Papua'
-                    }
-                }
-            });
-        </script>
-
         <div class="card-body">
-            <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.data-kunjungans.index') }}">
-                    {{ trans('global.back_to_list') }}
-                </a>
-            </div>
             <table class="table table-bordered table-striped">
                 <tbody>
                     <tr>
@@ -1081,6 +370,32 @@
                             </table>
                         </td>
                     </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="chart-container">
+            <div class="chart">
+                <canvas id="jawaPieChart"></canvas>
+            </div>
+            <div class="chart">
+                <canvas id="kalimantanPieChart"></canvas>
+            </div>
+            <div class="chart">
+                <canvas id="sumateraPieChart"></canvas>
+            </div>
+            <div class="chart">
+                <canvas id="sulawesiPieChart"></canvas>
+            </div>
+            <div class="chart">
+                <canvas id="baliNusraPieChart"></canvas>
+            </div>
+            <div class="chart">
+                <canvas id="papuaPieChart"></canvas>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered table-striped">
+                <tbody>
                     <tr>
                         <th class="category-header" onclick="toggleCategory('jawa')">
                             KATEGORI JAWA
@@ -1415,22 +730,667 @@
         </div>
     </div>
 
-    <style>
-        .category-header {
-            cursor: pointer;
-            background-color: lightgray;
-            font-weight: bold;
-            padding: 5px;
-        }
-
-        .category-content {
-            display: none;
-        }
-    </style>
     <script>
         function toggleCategory(category) {
             const content = document.querySelector(`.${category}-content`);
             content.style.display = content.style.display === 'none' ? 'block' : 'none';
         }
+    </script>
+    <script>
+        // Get the canvas element and its context
+        var ctx = document.getElementById('chartCanvas').getContext('2d');
+
+        // Prepare your data (replace this with your actual data)
+        var regions = ['ASEAN', 'Asia', 'Timur Tengah', 'Eropa', 'Amerika', 'Oseania', 'Afrika', ];
+        var regionTotals = [{{ $dataKunjungan->asean }}, {{ $dataKunjungan->asia }},
+            {{ $dataKunjungan->timur_tengah }},
+            {{ $dataKunjungan->eropa }}, {{ $dataKunjungan->amerika }}, {{ $dataKunjungan->oseania }},
+            {{ $dataKunjungan->afrika }},
+        ];
+
+        // Create the chart
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: regions,
+                datasets: [{
+                    label: 'Mancanegara',
+                    data: regionTotals,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: regions2,
+                datasets: [{
+                    label: 'Region Totals',
+                    data: region2Totals,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+    <script>
+        var ctx = document.getElementById('aseanPieChart').getContext('2d');
+
+        var regions = ['Malaysia', 'Filipina', 'Singapura', 'Thailand', 'Vietnam', 'ASEAN Lainnya'];
+        var populations = [
+            {{ $dataKunjungan->malaysia }},
+            {{ $dataKunjungan->filipina }},
+            {{ $dataKunjungan->singapura }},
+            {{ $dataKunjungan->thailand }},
+            {{ $dataKunjungan->vietnam }},
+            {{ $dataKunjungan->aseanlainnya }}
+        ];
+
+        var totalPopulation = populations.reduce((a, b) => a + b, 0);
+        var percentages = populations.map(population => ((population / totalPopulation) * 100).toFixed(2));
+
+        var backgroundColors = [
+            'rgba(255, 99, 132, 0.5)',
+            'rgba(54, 162, 235, 0.5)',
+            'rgba(255, 206, 86, 0.5)',
+            'rgba(75, 192, 192, 0.5)',
+            'rgba(153, 102, 255, 0.5)',
+            'rgba(255, 159, 64, 0.5)'
+        ];
+
+        var aseanPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: regions,
+                datasets: [{
+                    data: percentages,
+                    backgroundColor: backgroundColors
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Persentase Populasi Wilayah di ASEAN'
+                }
+            }
+        });
+    </script>
+    <script>
+        var ctx = document.getElementById('asiaPieChart').getContext('2d');
+
+        var regions = ['Hong Kong', 'India', 'Japan', 'Korea Selatan', 'Taiwan', 'Tiongkok', 'Timor Leste', 'Asia Lainnya'];
+        var populations = [
+            {{ $dataKunjungan->hongkong }},
+            {{ $dataKunjungan->india }},
+            {{ $dataKunjungan->jepang }},
+            {{ $dataKunjungan->korea_selatan }},
+            {{ $dataKunjungan->taiwan }},
+            {{ $dataKunjungan->tiongkok }},
+            {{ $dataKunjungan->timor_leste }},
+            {{ $dataKunjungan->asia_lainnya }}
+        ];
+
+        var totalPopulation = populations.reduce((a, b) => a + b, 0);
+        var percentages = populations.map(population => ((population / totalPopulation) * 100).toFixed(2));
+
+        var backgroundColors = [
+            'rgba(255, 99, 132, 0.5)',
+            'rgba(54, 162, 235, 0.5)',
+            'rgba(255, 206, 86, 0.5)',
+            'rgba(75, 192, 192, 0.5)',
+            'rgba(153, 102, 255, 0.5)',
+            'rgba(255, 159, 64, 0.5)',
+            'rgba(255, 0, 0, 0.5)',
+            'rgba(0, 255, 0, 0.5)'
+        ];
+
+        var asiaPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: regions,
+                datasets: [{
+                    data: percentages,
+                    backgroundColor: backgroundColors
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Persentase Populasi Wilayah di Asia'
+                }
+            }
+        });
+    </script>
+    <script>
+        var ctx = document.getElementById('timurTengahPieChart').getContext('2d');
+
+        var regions = ['Arab Saudi', 'Kuwait', 'Mesir', 'UAE', 'Yaman', 'Timur Tengah Lain'];
+        var populations = [
+            {{ $dataKunjungan->arab_saudi }},
+            {{ $dataKunjungan->kuwait }},
+            {{ $dataKunjungan->mesir }},
+            {{ $dataKunjungan->uae }},
+            {{ $dataKunjungan->yaman }},
+            {{ $dataKunjungan->timur_tengah_lain }}
+        ];
+
+        var totalPopulation = populations.reduce((a, b) => a + b, 0);
+        var percentages = populations.map(population => ((population / totalPopulation) * 100).toFixed(2));
+
+        var backgroundColors = [
+            'rgba(255, 99, 132, 0.5)',
+            'rgba(54, 162, 235, 0.5)',
+            'rgba(255, 206, 86, 0.5)',
+            'rgba(75, 192, 192, 0.5)',
+            'rgba(153, 102, 255, 0.5)',
+            'rgba(255, 159, 64, 0.5)'
+        ];
+
+        var timurTengahPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: regions,
+                datasets: [{
+                    data: percentages,
+                    backgroundColor: backgroundColors
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Persentase Populasi Wilayah di Timur Tengah'
+                }
+            }
+        });
+    </script>
+
+    <script>
+        var ctx = document.getElementById('eropaPieChart').getContext('2d');
+
+        var regions = ['Perancis', 'Jerman', 'Belanda', 'Inggris', 'Rusia', 'Eropa Lainnya'];
+        var populations = [
+            {{ $dataKunjungan->perancis }},
+            {{ $dataKunjungan->jerman }},
+            {{ $dataKunjungan->belanda }},
+            {{ $dataKunjungan->inggris }},
+            {{ $dataKunjungan->rusia }},
+            {{ $dataKunjungan->eropa_lainnya }}
+        ];
+
+        var totalPopulation = populations.reduce((a, b) => a + b, 0);
+        var percentages = populations.map(population => ((population / totalPopulation) * 100).toFixed(2));
+
+        var backgroundColors = [
+            'rgba(255, 99, 132, 0.5)',
+            'rgba(54, 162, 235, 0.5)',
+            'rgba(255, 206, 86, 0.5)',
+            'rgba(75, 192, 192, 0.5)',
+            'rgba(153, 102, 255, 0.5)',
+            'rgba(255, 159, 64, 0.5)'
+        ];
+
+        var eropaPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: regions,
+                datasets: [{
+                    data: percentages,
+                    backgroundColor: backgroundColors
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Persentase Populasi Wilayah di Eropa'
+                }
+            }
+        });
+    </script>
+    <script>
+        var ctx = document.getElementById('amerikaPieChart').getContext('2d');
+
+        var regions = ['Amerika Serikat', 'Kanada', 'Brazil', 'Meksiko', 'Amerika Lainnya'];
+        var populations = [
+            {{ $dataKunjungan->amerika_serikat }},
+            {{ $dataKunjungan->kanada }},
+            {{ $dataKunjungan->brazil }},
+            {{ $dataKunjungan->meksiko }},
+            {{ $dataKunjungan->amerika_lainnya }}
+        ];
+
+        var totalPopulation = populations.reduce((a, b) => a + b, 0);
+        var percentages = populations.map(population => ((population / totalPopulation) * 100).toFixed(2));
+
+        var backgroundColors = [
+            'rgba(255, 99, 132, 0.5)',
+            'rgba(54, 162, 235, 0.5)',
+            'rgba(255, 206, 86, 0.5)',
+            'rgba(75, 192, 192, 0.5)',
+            'rgba(153, 102, 255, 0.5)'
+        ];
+
+        var amerikaPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: regions,
+                datasets: [{
+                    data: percentages,
+                    backgroundColor: backgroundColors
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Persentase Populasi Wilayah di Amerika'
+                }
+            }
+        });
+    </script>
+    <script>
+        var ctx = document.getElementById('oseaniaPieChart').getContext('2d');
+
+        var regions = ['Australia', 'Selandia Baru', 'Papua Nugini', 'Oseania Lainnya'];
+        var populations = [
+            {{ $dataKunjungan->australia }},
+            {{ $dataKunjungan->selandia_baru }},
+            {{ $dataKunjungan->papua_nugini }},
+            {{ $dataKunjungan->oseania_lainnya }}
+        ];
+
+        var totalPopulation = populations.reduce((a, b) => a + b, 0);
+        var percentages = populations.map(population => ((population / totalPopulation) * 100).toFixed(2));
+
+        var backgroundColors = [
+            'rgba(255, 99, 132, 0.5)',
+            'rgba(54, 162, 235, 0.5)',
+            'rgba(255, 206, 86, 0.5)',
+            'rgba(75, 192, 192, 0.5)'
+        ];
+
+        var oseaniaPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: regions,
+                datasets: [{
+                    data: percentages,
+                    backgroundColor: backgroundColors
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Persentase Populasi Wilayah di Oseania'
+                }
+            }
+        });
+    </script>
+    <script>
+        var ctx = document.getElementById('afrikaPieChart').getContext('2d');
+
+        var regions = ['Afrika Selatan', 'Afrika Lainnya'];
+        var populations = [
+            {{ $dataKunjungan->afrika_selatan }},
+            {{ $dataKunjungan->afrika_lainnya }}
+        ];
+
+        var totalPopulation = populations.reduce((a, b) => a + b, 0);
+        var percentages = populations.map(population => ((population / totalPopulation) * 100).toFixed(2));
+
+        var backgroundColors = [
+            'rgba(255, 99, 132, 0.5)',
+            'rgba(54, 162, 235, 0.5)'
+        ];
+
+        var afrikaPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: regions,
+                datasets: [{
+                    data: percentages,
+                    backgroundColor: backgroundColors
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Persentase Populasi Wilayah di Afrika'
+                }
+            }
+        });
+    </script>
+
+    <script>
+        // Get the canvas element and its context
+        var ctx = document.getElementById('chartCanvas2').getContext('2d');
+
+        var regions2 = ['Jawa', 'Kalimantan', 'Sumatera', 'Sulawesi', 'Balinustra', 'Papua'];
+        var region2Totals = [{{ $dataKunjungan->jawa }}, {{ $dataKunjungan->kalimantan }},
+            {{ $dataKunjungan->sumatera }}, {{ $dataKunjungan->sulawesi }}, {{ $dataKunjungan->bali_nustra }},
+            {{ $dataKunjungan->papuaa }}
+        ];
+
+        // Create the chart
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: regions2,
+                datasets: [{
+                    label: 'Nusantara',
+                    data: region2Totals,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: regions2,
+                datasets: [{
+                    label: 'Region Totals',
+                    data: region2Totals,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+    <script>
+        var ctx = document.getElementById('jawaPieChart').getContext('2d');
+
+        var regions = ['Jawa Timur', 'Jawa Barat', 'Jawa Tengah', 'DIY', 'DKI Jakarta', 'Banten'];
+        var populations = [
+            {{ $dataKunjungan->jawa_timur }},
+            {{ $dataKunjungan->jawa_barat }},
+            {{ $dataKunjungan->jawa_tengah }},
+            {{ $dataKunjungan->diy }},
+            {{ $dataKunjungan->dki }},
+            {{ $dataKunjungan->banten }}
+        ];
+
+        var totalPopulation = populations.reduce((a, b) => a + b, 0);
+        var percentages = populations.map(population => ((population / totalPopulation) * 100).toFixed(2));
+
+        var backgroundColors = [
+            'rgba(255, 99, 132, 0.5)',
+            'rgba(54, 162, 235, 0.5)',
+            'rgba(255, 206, 86, 0.5)',
+            'rgba(75, 192, 192, 0.5)',
+            'rgba(153, 102, 255, 0.5)',
+            'rgba(255, 159, 64, 0.5)' // Add more colors as needed
+        ];
+
+        var jawaPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: regions,
+                datasets: [{
+                    data: percentages,
+                    backgroundColor: backgroundColors
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Persentase Populasi Wilayah di Jawa'
+                }
+            }
+        });
+    </script>
+
+    <script>
+        var ctx = document.getElementById('kalimantanPieChart').getContext('2d');
+
+        var regions = ['Kaltara', 'Kaltim', 'Kalteng', 'Kalbar', 'Kalsel'];
+        var populations = [
+            {{ $dataKunjungan->kaltara }},
+            {{ $dataKunjungan->kaltim }},
+            {{ $dataKunjungan->kalteng }},
+            {{ $dataKunjungan->kalbar }},
+            {{ $dataKunjungan->kalsel }}
+        ];
+
+
+        var totalPopulation = populations.reduce((a, b) => a + b, 0);
+        var percentages = populations.map(population => ((population / totalPopulation) * 100).toFixed(2));
+
+        var backgroundColors = [
+            'rgba(255, 99, 132, 0.5)',
+            'rgba(54, 162, 235, 0.5)',
+            'rgba(255, 206, 86, 0.5)',
+            'rgba(75, 192, 192, 0.5)',
+            'rgba(153, 102, 255, 0.5)'
+        ];
+
+        var kalimantanPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: regions,
+                datasets: [{
+                    data: percentages,
+                    backgroundColor: backgroundColors
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Persentase Populasi Wilayah di Kalimantan'
+                }
+
+            }
+
+        });
+    </script>
+    <script>
+        var ctx = document.getElementById('sumateraPieChart').getContext('2d');
+
+        var regions = ['Aceh', 'Sumatera Utara', 'Riau', 'Kepulauan Riau', 'Jambi', 'Sumatera Barat', 'Sumatera Selatan',
+            'Kepulauan Bangka Belitung', 'Bengkulu', 'Lampung'
+        ];
+        var populations = [
+            {{ $dataKunjungan->aceh }},
+            {{ $dataKunjungan->sumut }},
+            {{ $dataKunjungan->riau }},
+            {{ $dataKunjungan->kep_riau }},
+            {{ $dataKunjungan->jambi }},
+            {{ $dataKunjungan->sumbar }},
+            {{ $dataKunjungan->sumsel }},
+            {{ $dataKunjungan->bangka }},
+            {{ $dataKunjungan->bengkulu }},
+            {{ $dataKunjungan->lampung }}
+        ];
+
+        var totalPopulation = populations.reduce((a, b) => a + b, 0);
+        var percentages = populations.map(population => ((population / totalPopulation) * 100).toFixed(2));
+
+        var backgroundColors = [
+            'rgba(255, 99, 132, 0.5)',
+            'rgba(54, 162, 235, 0.5)',
+            'rgba(255, 206, 86, 0.5)',
+            'rgba(75, 192, 192, 0.5)',
+            'rgba(153, 102, 255, 0.5)',
+            'rgba(255, 159, 64, 0.5)',
+            'rgba(255, 0, 0, 0.5)',
+            'rgba(0, 255, 0, 0.5)',
+            'rgba(0, 0, 255, 0.5)',
+            'rgba(128, 128, 128, 0.5)' // Add more colors as needed
+        ];
+
+        var sumateraPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: regions,
+                datasets: [{
+                    data: percentages,
+                    backgroundColor: backgroundColors
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Persentase Populasi Wilayah di Sumatera'
+                }
+            }
+        });
+    </script>
+    <script>
+        var ctx = document.getElementById('sulawesiPieChart').getContext('2d');
+
+        var regions = ['Sulawesi Utara', 'Sulawesi Barat', 'Sulawesi Tengah', 'Sulawesi Selatan', 'Sulawesi Tenggara',
+            'Gorontalo'
+        ];
+        var populations = [
+            {{ $dataKunjungan->sulut }},
+            {{ $dataKunjungan->sulbar }},
+            {{ $dataKunjungan->sulteng }},
+            {{ $dataKunjungan->sulsel }},
+            {{ $dataKunjungan->sulgara }},
+            {{ $dataKunjungan->gorontalo }}
+        ];
+
+        var totalPopulation = populations.reduce((a, b) => a + b, 0);
+        var percentages = populations.map(population => ((population / totalPopulation) * 100).toFixed(2));
+
+        var backgroundColors = [
+            'rgba(255, 99, 132, 0.5)',
+            'rgba(54, 162, 235, 0.5)',
+            'rgba(255, 206, 86, 0.5)',
+            'rgba(75, 192, 192, 0.5)',
+            'rgba(153, 102, 255, 0.5)',
+            'rgba(255, 159, 64, 0.5)' // Add more colors as needed
+        ];
+
+        var sulawesiPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: regions,
+                datasets: [{
+                    data: percentages,
+                    backgroundColor: backgroundColors
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Persentase Populasi Wilayah di Sulawesi'
+                }
+            }
+        });
+    </script>
+    <script>
+        var ctx = document.getElementById('baliNusraPieChart').getContext('2d');
+
+        var regions = ['Bali', 'Nusa Tenggara Barat (NTB)', 'Nusa Tenggara Timur (NTT)'];
+        var populations = [
+            {{ $dataKunjungan->bali }},
+            {{ $dataKunjungan->ntb }},
+            {{ $dataKunjungan->ntt }}
+        ];
+
+        var totalPopulation = populations.reduce((a, b) => a + b, 0);
+        var percentages = populations.map(population => ((population / totalPopulation) * 100).toFixed(2));
+
+        var baliNusraPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: regions,
+                datasets: [{
+                    data: percentages,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 206, 86, 0.5)'
+                    ]
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Persentase Populasi Wilayah di Bali & Nusa Tenggara'
+                }
+            }
+        });
+    </script>
+
+    <script>
+        var ctx = document.getElementById('papuaPieChart').getContext('2d');
+
+        var regions = ['Maluku', 'Maluku Utara', 'Papua', 'Papua Barat', 'Papua Barat Daya', 'Papua Selatan',
+            'Papua Tengah', 'Papua Pegunungan'
+        ];
+        var populations = [
+            {{ $dataKunjungan->maluku }},
+            {{ $dataKunjungan->maluku_utara }},
+            {{ $dataKunjungan->papua }},
+            {{ $dataKunjungan->papua_barat }},
+            {{ $dataKunjungan->papua_baratdaya }},
+            {{ $dataKunjungan->papua_selatan }},
+            {{ $dataKunjungan->papua_tengah }},
+            {{ $dataKunjungan->papua_pegunungan }}
+        ];
+
+        var totalPopulation = populations.reduce((a, b) => a + b, 0);
+        var percentages = populations.map(population => ((population / totalPopulation) * 100).toFixed(2));
+
+        var backgroundColors = [
+            'rgba(255, 99, 132, 0.5)',
+            'rgba(54, 162, 235, 0.5)',
+            'rgba(255, 206, 86, 0.5)',
+            'rgba(75, 192, 192, 0.5)',
+            'rgba(153, 102, 255, 0.5)',
+            'rgba(255, 159, 64, 0.5)',
+            'rgba(255, 0, 0, 0.5)',
+            'rgba(0, 255, 0, 0.5)'
+        ];
+
+        var papuaPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: regions,
+                datasets: [{
+                    data: percentages,
+                    backgroundColor: backgroundColors
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Persentase Populasi Wilayah di Papua'
+                }
+            }
+        });
     </script>
 @endsection

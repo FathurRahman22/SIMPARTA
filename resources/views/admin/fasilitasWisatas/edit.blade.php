@@ -10,7 +10,7 @@
                 enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
-                div class="form-group">
+                <div class="form-group">
                 <label for="tag_id">{{ trans('cruds.fasilitasWisata.fields.tag') }}</label>
                 <select class="form-control select2 {{ $errors->has('tag') ? 'is-invalid' : '' }}" name="tag_id"
                     id="tag_id">
